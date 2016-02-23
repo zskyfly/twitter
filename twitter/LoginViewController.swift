@@ -23,7 +23,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func onLoginButton(sender: AnyObject) {
         TwitterClient.sharedInstance.login({ () -> () in
-            print("Success, I've logged in")
             self.performSegueWithIdentifier("loginSegue", sender: self)
         }, failure:
         { (error: NSError) -> () in

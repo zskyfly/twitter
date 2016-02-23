@@ -14,12 +14,15 @@ class Tweet: NSObject {
     var createdAt: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
+    var user: User?
 
     init(dictionary: NSDictionary) {
         self.text = dictionary["text"] as? String
         self.retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         self.favoriteCount = (dictionary["favourites_count"] as? Int) ?? 0
-        
+        if let userDictionary = dictionary["user"] as? NSDictionary {
+            self.user = User(dictionary: userDictionary)
+        }
         let createdAtString = dictionary["created_at"] as? String
         if let createdAtString = createdAtString {
             let formatter = NSDateFormatter()
@@ -35,5 +38,9 @@ class Tweet: NSObject {
             tweets.append(tweet)
         }
         return tweets
+    }
+
+    func getCreatedAtString() -> String {
+        return ""
     }
 }
