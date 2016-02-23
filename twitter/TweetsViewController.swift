@@ -15,7 +15,7 @@ class TweetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        TwitterClient.sharedInstance.getHomeTimeline({ (tweets:[Tweet]) -> () in
+        TwitterClient.sharedInstance.homeTimeline({ (tweets:[Tweet]) -> () in
             self.tweets = tweets
             for tweet in tweets {
                 print ("\(tweet.text)")
@@ -33,6 +33,9 @@ class TweetsViewController: UIViewController {
     }
     
 
+    @IBAction func onLogoutButton(sender: AnyObject) {
+        TwitterClient.sharedInstance.logout()
+    }
     /*
     // MARK: - Navigation
 
