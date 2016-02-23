@@ -20,6 +20,7 @@ class TweetCell: UITableViewCell {
         didSet {
             if let user = tweet.user {
                 userImageView.setImageWithURL(user.profileUrl!)
+                print("Setting image to url: \(user.profileUrl!)")
                 userNameLabel.text = user.name as? String
                 userScreenName.text = "@\(user.screenName!)"
             }
