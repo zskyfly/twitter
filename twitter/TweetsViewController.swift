@@ -29,6 +29,12 @@ class TweetsViewController: UIViewController {
         self.reloadTweets()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.reloadTweets()
+    }
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,6 +65,7 @@ class TweetsViewController: UIViewController {
             let tweet = self.tweets[row]
             let vc = segue.destinationViewController as! TweetDetailViewController
             vc.tweet = tweet
+            tableView.deselectRowAtIndexPath(indexPath!, animated: true)
         case "NewTweetSegue":
             let vc = segue.destinationViewController as! NewTweetViewController
             vc.user = User._currentUser

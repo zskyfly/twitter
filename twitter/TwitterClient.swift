@@ -81,7 +81,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
-    func statusUpdate(status: String, success: (Tweet) -> (), failure: (NSError) -> ()) {
+    func statusUpdate(status: String, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
+
         let data = [
             "status": status
         ]
@@ -89,9 +90,9 @@ class TwitterClient: BDBOAuth1SessionManager {
         POST(TwitterClient.statusesUpdate, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweetDictionary = response as! NSDictionary
             let tweet = Tweet(dictionary: tweetDictionary)
-            success(tweet)
+            success?(tweet)
         }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-            failure(error)
+            failure?(error)
         })
     }
 }

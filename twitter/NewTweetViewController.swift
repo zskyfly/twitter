@@ -13,18 +13,25 @@ class NewTweetViewController: UIViewController {
     @IBOutlet weak var userHandleLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
-
+    @IBOutlet weak var statusUpdateTextField: UITextView!
+    
     var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setViewProperties()
         // Do any additional setup after loading the view.
+        self.statusUpdateTextField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func onTapTweet(sender: AnyObject) {
+        let statusText = statusUpdateTextField.text
+        TwitterClient.sharedInstance.statusUpdate(statusText, success: nil, failure: nil)
     }
 
     func setViewProperties() {
