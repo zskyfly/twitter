@@ -16,6 +16,7 @@ class NewTweetViewController: UIViewController {
     @IBOutlet weak var statusUpdateTextField: UITextView!
     
     var user: User!
+    var replyTweet: Tweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +31,7 @@ class NewTweetViewController: UIViewController {
     }
 
     @IBAction func onTapTweet(sender: AnyObject) {
-        let statusText = statusUpdateTextField.text
-        TwitterClient.sharedInstance.statusUpdate(statusText, replyStatusId: nil, success: { (tweet: Tweet) -> () in
-            self.navigationController?.popViewControllerAnimated(true)
-        }) { (error: NSError) -> () in
-            print("\(error.localizedDescription)")
-        }
+        self.postStatusUpdate()
     }
 
     func setViewProperties() {
@@ -51,7 +47,20 @@ class NewTweetViewController: UIViewController {
         ImageHelper.setImageForView(self.user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil) { (error) -> Void in
             print("\(error.localizedDescription)")
         }
-        
+        if let inReplyToUser = self.replyTweet?.user {
+            self.statusUpdateTextField.text = "@\(inReplyToUser.screenName!)"
+        }
+    }
+
+    func postStatusUpdate() {
+        let statusText = statusUpdateTextField.text
+        let replyStatusId = replyTweet?.idStr
+
+        TwitterClient.sharedInstance.statusUpdate(statusText, replyStatusId: replyStatusId, success: { (tweet: Tweet) -> () in
+            self.navigationController?.popViewControllerAnimated(true)
+            }) { (error: NSError) -> () in
+                print("\(error.localizedDescription)")
+        }
     }
 
 }

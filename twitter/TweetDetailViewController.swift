@@ -40,6 +40,20 @@ class TweetDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let identifier = segue.identifier!
+
+        switch identifier {
+
+        case "ReplySegue":
+            let vc = segue.destinationViewController as! NewTweetViewController
+            vc.user = User._currentUser
+            vc.replyTweet = tweet
+        default:
+            return
+        }
+    }
     
 
     /*
