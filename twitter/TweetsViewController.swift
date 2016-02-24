@@ -50,6 +50,16 @@ class TweetsViewController: UIViewController {
     }
     */
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let vc = segue.destinationViewController as! TweetDetailViewController
+        let cell = sender as! TweetCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let row = indexPath!.row
+        let tweet = self.tweets[row]
+        print("found cell at \(row) and tweet \(tweet)")
+        vc.tweet = tweet
+    }
+
 }
 
 extension TweetsViewController: UITableViewDataSource {

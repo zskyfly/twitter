@@ -113,9 +113,10 @@
                                         <connections>
                                             <outlet property="createdAtLabel" destination="S0n-hr-s9a" id="gQP-Y1-gdG"/>
                                             <outlet property="tweetTextLabel" destination="Gax-RU-1uO" id="fd7-J1-1lg"/>
+                                            <outlet property="userHandleLabel" destination="PrM-I4-Npv" id="NI4-Yo-rDD"/>
                                             <outlet property="userImageView" destination="UyT-hL-EwL" id="cAD-sO-5Ot"/>
                                             <outlet property="userNameLabel" destination="2HH-M0-Oj5" id="fbU-lN-b6S"/>
-                                            <outlet property="userScreenName" destination="PrM-I4-Npv" id="bOc-17-a85"/>
+                                            <segue destination="psI-ki-wcc" kind="show" id="pRH-Pv-PLG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -145,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="1022" y="336"/>
         </scene>
-        <!--Tweet Detail View Controller-->
+        <!--Tweet-->
         <scene sceneID="OwV-Vm-xAe">
             <objects>
                 <viewController id="psI-ki-wcc" customClass="TweetDetailViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
@@ -158,9 +159,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMc-iA-59d">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVv-xR-Tgt" customClass="TweetDetailView" customModule="twitter" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVv-xR-Tgt" userLabel="TweetDetailView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zachary Matthews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzh-oZ-0SV">
@@ -377,18 +378,37 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1ih-Yu-805" firstAttribute="top" secondItem="WMc-iA-59d" secondAttribute="bottom" id="8AI-VU-Ppu"/>
+                            <constraint firstItem="WMc-iA-59d" firstAttribute="top" secondItem="LdE-CM-0qV" secondAttribute="top" id="9lk-0P-QPn"/>
                             <constraint firstAttribute="trailing" secondItem="WMc-iA-59d" secondAttribute="trailing" id="VKd-BC-iEd"/>
                             <constraint firstItem="iVv-xR-Tgt" firstAttribute="height" secondItem="LdE-CM-0qV" secondAttribute="height" id="bIm-5W-KmX"/>
                             <constraint firstItem="WMc-iA-59d" firstAttribute="leading" secondItem="LdE-CM-0qV" secondAttribute="leading" id="g5m-n5-hEI"/>
-                            <constraint firstItem="WMc-iA-59d" firstAttribute="top" secondItem="dUH-Zr-ndE" secondAttribute="bottom" id="trT-TD-aKm"/>
+                            <constraint firstItem="WMc-iA-59d" firstAttribute="top" secondItem="dUH-Zr-ndE" secondAttribute="bottom" id="iZS-zN-Tu5"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iZS-zN-Tu5"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Ffb-ld-La2"/>
+                    <navigationItem key="navigationItem" title="Tweet" id="Zpd-Re-BaB">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="a6b-Tt-d3T"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="createdAtLabel" destination="baz-yk-ZS8" id="zeb-sj-h7W"/>
+                        <outlet property="likeCountLabel" destination="llY-FM-ybT" id="hMC-JO-4nB"/>
+                        <outlet property="retweetCountLabel" destination="Snn-Lj-w3F" id="gsp-UG-T77"/>
+                        <outlet property="scrollView" destination="WMc-iA-59d" id="072-Q6-gRQ"/>
+                        <outlet property="tweetDetailView" destination="iVv-xR-Tgt" id="edx-Vb-yri"/>
+                        <outlet property="tweetTextLabel" destination="9Jz-wZ-PTx" id="FTu-4c-OKm"/>
+                        <outlet property="userHandleLabel" destination="8Yn-ql-dsu" id="3Tl-yr-g8g"/>
+                        <outlet property="userImageView" destination="XRo-2Y-hIR" id="Sba-Ia-N3c"/>
+                        <outlet property="userNameLabel" destination="Nzh-oZ-0SV" id="dHG-DC-j16"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JR8-cb-pPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1908" y="352"/>
+            <point key="canvasLocation" x="1444" y="336"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bTD-kj-hh1">
@@ -408,25 +428,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F32-zj-cNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="635" y="336"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="eKD-Vs-4fb">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dfg-b2-Iez" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9L8-8H-08k">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="psI-ki-wcc" kind="relationship" relationship="rootViewController" id="elv-zN-WQH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CFX-Da-MOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1531" y="352"/>
         </scene>
     </scenes>
     <resources>

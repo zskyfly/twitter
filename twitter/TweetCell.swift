@@ -12,7 +12,7 @@ class TweetCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userScreenName: UILabel!
+    @IBOutlet weak var userHandleLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
 
@@ -22,7 +22,7 @@ class TweetCell: UITableViewCell {
                 userImageView.setImageWithURL(user.profileUrl!)
                 print("Setting image to url: \(user.profileUrl!)")
                 userNameLabel.text = user.name as? String
-                userScreenName.text = "@\(user.screenName!)"
+                userHandleLabel.text = "@\(user.screenName!)"
             }
             tweetTextLabel.text = tweet.text as? String
 //            createdAtLabel.text = tweet.createdAt as! String
