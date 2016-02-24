@@ -396,10 +396,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="createdAtLabel" destination="baz-yk-ZS8" id="zeb-sj-h7W"/>
-                        <outlet property="likeCountLabel" destination="llY-FM-ybT" id="hMC-JO-4nB"/>
-                        <outlet property="retweetCountLabel" destination="Snn-Lj-w3F" id="gsp-UG-T77"/>
-                        <outlet property="scrollView" destination="WMc-iA-59d" id="072-Q6-gRQ"/>
-                        <outlet property="tweetDetailView" destination="iVv-xR-Tgt" id="edx-Vb-yri"/>
+                        <outlet property="likeCountLabel" destination="llY-FM-ybT" id="yiR-jw-YN9"/>
+                        <outlet property="retweetCountLabel" destination="Snn-Lj-w3F" id="yAN-Iu-zlW"/>
                         <outlet property="tweetTextLabel" destination="9Jz-wZ-PTx" id="FTu-4c-OKm"/>
                         <outlet property="userHandleLabel" destination="8Yn-ql-dsu" id="3Tl-yr-g8g"/>
                         <outlet property="userImageView" destination="XRo-2Y-hIR" id="Sba-Ia-N3c"/>

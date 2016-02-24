@@ -18,8 +18,6 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var tweetDetailView: UIView!
     var tweet: Tweet!
 
     override func viewDidLoad() {
@@ -31,12 +29,11 @@ class TweetDetailViewController: UIViewController {
         }
         tweetTextLabel.text = self.tweet.text as? String
             //            createdAtLabel.text = tweet.createdAt as! String
+        retweetCountLabel.text = "\(self.tweet.retweetCount)"
+        likeCountLabel.text = "\(self.tweet.favoriteCount)"
 
         userImageView.layer.cornerRadius = 3
         userImageView.clipsToBounds = true
-
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        tweetDetailView.translatesAutoresizingMaskIntoConstraints = false
 
     }
 
