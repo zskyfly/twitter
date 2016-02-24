@@ -106,4 +106,19 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure?(error)
         })
     }
+
+    func favoriteCreate(statusId: String, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
+
+        let data = [
+            "id": statusId
+        ]
+
+        POST(TwitterClient.favoriteCreate, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweetDictionary = response as! NSDictionary
+            let tweet = Tweet(dictionary: tweetDictionary)
+            success?(tweet)
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure?(error)
+        })
+    }
 }
