@@ -12,7 +12,7 @@ class User: NSObject {
     
     static let defaultsKeyCurrentUserData = "current_user_data"
     static let notificationEventUserDidLogout = "user_did_logout"
-    static let placeholderProfileImage = "missing_user"
+    static let placeholderProfileImage = UIImage(named: "missing_user")
 
     static var _currentUser: User?
 

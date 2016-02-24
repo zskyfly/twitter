@@ -22,6 +22,7 @@
 		931B36301C7C0FEC00505E97 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B362F1C7C0FEC00505E97 /* TwitterClient.swift */; };
 		931B36321C7C228A00505E97 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B36311C7C228A00505E97 /* TweetsViewController.swift */; };
 		93BBEA821C7D63C80033C051 /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBEA811C7D63C80033C051 /* NewTweetViewController.swift */; };
+		93BBEA841C7D712F0033C051 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBEA831C7D712F0033C051 /* ImageHelper.swift */; };
 		F8B1C40347093281BB5C4FF7 /* Pods_twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA04F9436E93490AE2350AAC /* Pods_twitter.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		931B362F1C7C0FEC00505E97 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		931B36311C7C228A00505E97 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		93BBEA811C7D63C80033C051 /* NewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
+		93BBEA831C7D712F0033C051 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		AA04F9436E93490AE2350AAC /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				931B13081C7C4D630011E226 /* TwitterDateFormatter.swift */,
+				93BBEA831C7D712F0033C051 /* ImageHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				931B362C1C7BE9D800505E97 /* User.swift in Sources */,
 				931B362E1C7BE9E200505E97 /* Tweet.swift in Sources */,
 				93BBEA821C7D63C80033C051 /* NewTweetViewController.swift in Sources */,
+				93BBEA841C7D712F0033C051 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

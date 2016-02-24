@@ -28,17 +28,18 @@ class NewTweetViewController: UIViewController {
     }
 
     func setViewProperties() {
+        userImageView.layer.cornerRadius = 3
+        userImageView.clipsToBounds = true
+
         if let name = self.user.name as? String {
             self.userNameLabel.text = name
         }
         if let userHandle = self.user.screenName as? String {
             self.userHandleLabel.text = userHandle
         }
-
-
-
-        //        let urlRequest = NSURLRequest(URL: self.user.profileUrl!)
-        //        let placeHolderImage = UIImage(named: User.placeholderProfileImage)
+        ImageHelper.setImageForView(self.user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil) { (error) -> Void in
+            print("\(error.localizedDescription)")
+        }
         
     }
 

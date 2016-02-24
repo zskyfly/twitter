@@ -22,8 +22,11 @@ class TweetDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userImageView.layer.cornerRadius = 3
+        userImageView.clipsToBounds = true
+
         if let user = self.tweet.user {
-            userImageView.setImageWithURL(user.profileUrl!)
+            ImageHelper.setImageForView(user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil, failure: nil)
             userNameLabel.text = user.name as? String
             userHandleLabel.text = "@\(user.screenName!)"
         }
@@ -31,10 +34,6 @@ class TweetDetailViewController: UIViewController {
             //            createdAtLabel.text = tweet.createdAt as! String
         retweetCountLabel.text = "\(self.tweet.retweetCount)"
         likeCountLabel.text = "\(self.tweet.favoriteCount)"
-
-        userImageView.layer.cornerRadius = 3
-        userImageView.clipsToBounds = true
-
     }
 
     override func didReceiveMemoryWarning() {
