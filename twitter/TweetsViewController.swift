@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SVPullToRefresh
 
 class TweetsViewController: UIViewController {
 
     var tweets: [Tweet]!
+    let estimated_row_height: CGFloat = 100.0
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -18,17 +20,13 @@ class TweetsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 90
 
-        TwitterClient.sharedInstance.homeTimeline({ (tweets:[Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }) { (error: NSError) -> () in
-                print("\(error.localizedDescription)")
+        tableView.addPullToRefreshWithActionHandler { () -> Void in
+            self.reloadTweets()
+            self.tableView.pullToRefreshView.stopAnimating()
         }
 
-        // Do any additional setup after loading the view.
+        self.reloadTweets()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +38,7 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogoutButton(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()
     }
+
     /*
     // MARK: - Navigation
 
@@ -58,6 +57,17 @@ class TweetsViewController: UIViewController {
         let tweet = self.tweets[row]
         print("found cell at \(row) and tweet \(tweet)")
         vc.tweet = tweet
+    }
+
+    func reloadTweets() {
+        TwitterClient.sharedInstance.homeTimeline({ (tweets:[Tweet]) -> () in
+            self.tableView.rowHeight = UITableViewAutomaticDimension
+            self.tableView.estimatedRowHeight = self.estimated_row_height
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }) { (error: NSError) -> () in
+            print("\(error.localizedDescription)")
+        }
     }
 
 }
