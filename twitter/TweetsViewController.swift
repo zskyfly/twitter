@@ -60,7 +60,6 @@ class TweetsViewController: UIViewController {
             let vc = segue.destinationViewController as! TweetDetailViewController
             vc.tweet = tweet
         case "NewTweetSegue":
-            print("test")
             let vc = segue.destinationViewController as! NewTweetViewController
             vc.user = User._currentUser
         default:
