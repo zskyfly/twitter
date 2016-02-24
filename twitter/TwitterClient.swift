@@ -17,9 +17,17 @@ class TwitterClient: BDBOAuth1SessionManager {
     static let accessTokenPath = "oauth/access_token"
     static let callBackUrlScheme = "twitterephiphanies://oauth"
 
-    static let statusesUpdate = "1.1/statuses/update.json"
-    static let statusesHomeTimeline = "1.1/statuses/home_timeline.json"
     static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
+    static let statusesHomeTimeline = "1.1/statuses/home_timeline.json"
+    static let statusesUpdate = "1.1/statuses/update.json"
+    static func statusesRetweet (statusId: String) -> (String) {
+        return "1.1/statuses/retweet/:id.json".stringByReplacingOccurrencesOfString("%id%", withString: statusId)
+    }
+    static func statusesUnretweet (retweetStatusId: String) -> (String) {
+        return "1.1/statuses/unretweet/:id.json".stringByReplacingOccurrencesOfString("%id%", withString: retweetStatusId)
+    }
+    static let favoriteCreate = "1.1/favorites/create.json"
+    static let favoriteDestroy = "1.1/favorites/destroy.json"
 
     static let sharedInstance = TwitterClient(baseURL: NSURL(string: TwitterClient.baseUrl)!, consumerKey: TwitterClient.consumerKey, consumerSecret: TwitterClient.consumerSecret)
 
@@ -81,11 +89,14 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
-    func statusUpdate(status: String, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
+    func statusUpdate(status: String, replyStatusId: String? = nil, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
 
-        let data = [
+        var data = [
             "status": status
         ]
+        if let replyStatusId = replyStatusId {
+            data["in_reply_to_status_id"] = replyStatusId
+        }
 
         POST(TwitterClient.statusesUpdate, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweetDictionary = response as! NSDictionary

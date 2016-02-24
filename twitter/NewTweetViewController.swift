@@ -31,7 +31,11 @@ class NewTweetViewController: UIViewController {
 
     @IBAction func onTapTweet(sender: AnyObject) {
         let statusText = statusUpdateTextField.text
-        TwitterClient.sharedInstance.statusUpdate(statusText, success: nil, failure: nil)
+        TwitterClient.sharedInstance.statusUpdate(statusText, replyStatusId: nil, success: { (tweet: Tweet) -> () in
+            self.navigationController?.popViewControllerAnimated(true)
+        }) { (error: NSError) -> () in
+            print("\(error.localizedDescription)")
+        }
     }
 
     func setViewProperties() {
