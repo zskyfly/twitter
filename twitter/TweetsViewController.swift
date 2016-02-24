@@ -33,7 +33,6 @@ class TweetsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func onLogoutButton(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()
@@ -50,13 +49,24 @@ class TweetsViewController: UIViewController {
     */
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController as! TweetDetailViewController
-        let cell = sender as! TweetCell
-        let indexPath = tableView.indexPathForCell(cell)
-        let row = indexPath!.row
-        let tweet = self.tweets[row]
-        print("found cell at \(row) and tweet \(tweet)")
-        vc.tweet = tweet
+        let identifier = segue.identifier!
+
+        switch identifier {
+        case "DetailViewSegue":
+            let cell = sender as! TweetCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let row = indexPath!.row
+            let tweet = self.tweets[row]
+            let vc = segue.destinationViewController as! TweetDetailViewController
+            vc.tweet = tweet
+        case "NewTweetSegue":
+            let vc = segue.destinationViewController as! NewTweetViewController
+            vc.user = tweets[0].user!
+        default:
+            return
+        }
+
+
     }
 
     func reloadTweets() {
