@@ -23,7 +23,10 @@ class TweetCell: UITableViewCell {
                 userNameLabel.text = user.name as? String
                 userHandleLabel.text = "@\(user.screenName!)"
             }
-            tweetTextLabel.text = tweet.text as? String
+            if let text = tweet.text {
+                tweetTextLabel.text = text
+            }
+
             createdAtLabel.text = tweet.getCreatedAtForList()
         }
     }

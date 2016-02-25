@@ -10,7 +10,7 @@ import UIKit
 
 class Tweet: NSObject {
 
-    var text: NSString?
+    var text: String?
     var createdAt: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
@@ -19,6 +19,7 @@ class Tweet: NSObject {
 
     init(dictionary: NSDictionary) {
         self.text = dictionary["text"] as? String
+        self.text = text?.stringByRemovingPercentEncoding
         self.retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         self.favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         self.idStr = dictionary["id_str"] as? String
@@ -27,8 +28,6 @@ class Tweet: NSObject {
         }
         if let createdAtString = dictionary["created_at"] as? String {
             self.createdAt = DateTimeHelper.sharedInstance.convertStringToDate(createdAtString)
-            let newString = DateTimeHelper.sharedInstance.convertDateToString(self.createdAt!, formatString: nil, formatStyle: DateTimeHelper.detailViewFormat)
-            print("converting \(createdAtString) to \(self.createdAt) and back to \(newString)")
         }
     }
 
