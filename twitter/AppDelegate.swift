@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserverForName(User.notificationEventUserDidLogout, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) -> Void in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateInitialViewController()
-            UIView.transitionWithView(self.window!, duration: 0.5, options: UIViewAnimationOptions.TransitionCurlDown, animations: { () -> Void in
+            UIView.transitionWithView(self.window!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () -> Void in
                 self.window?.rootViewController = vc
             }, completion: nil)
 

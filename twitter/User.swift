@@ -21,6 +21,7 @@ class User: NSObject {
     var screenName: NSString?
     var profileUrl: NSURL?
     var tagLine: NSString?
+    var timeLineTitle: String?
 
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -30,6 +31,10 @@ class User: NSObject {
             self.profileUrl = NSURL(string: profileUrlString)
         }
         self.tagLine = dictionary["description"] as? String
+        if let screenName = self.screenName {
+            self.timeLineTitle = "@\(screenName)"
+        }
+
     }
 
     class var currentUser: User? {

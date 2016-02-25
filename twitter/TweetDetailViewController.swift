@@ -18,7 +18,11 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     var tweet: Tweet!
+    var likeInFlight: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +61,17 @@ class TweetDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func onTapLike(sender: AnyObject) {
+        let statusId = self.tweet.idStr!
+        if !self.likeInFlight {
+            // self.toggleLikeButton()
+            TwitterClient.sharedInstance.favoriteCreate(statusId, success: { (tweet: Tweet) -> () in
+                print("favorite success")
+                }) { (error: NSError) -> () in
+                    print("\(error.localizedDescription)")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

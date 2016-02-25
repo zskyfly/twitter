@@ -16,12 +16,28 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter_logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="Y7Y-TH-2xk">
+                                <rect key="frame" x="276" y="276" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="apA-XK-c6X"/>
+                                    <constraint firstAttribute="width" constant="48" id="idj-Bk-XfQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Y7Y-TH-2xk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Q4M-ZM-nJJ"/>
+                            <constraint firstItem="Y7Y-TH-2xk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iL7-7W-7CQ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-275" y="105"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Twitter_logo_white" width="16" height="16"/>
+    </resources>
 </document>

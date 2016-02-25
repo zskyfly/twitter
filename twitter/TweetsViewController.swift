@@ -14,6 +14,7 @@ class TweetsViewController: UIViewController {
     var tweets: [Tweet]!
     let estimated_row_height: CGFloat = 100.0
 
+
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -26,12 +27,13 @@ class TweetsViewController: UIViewController {
             self.tableView.pullToRefreshView.stopAnimating()
         }
 
+        self.navigationItem.title = User._currentUser?.timeLineTitle
+
         self.reloadTweets()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.reloadTweets()
     }
 
 
@@ -69,6 +71,7 @@ class TweetsViewController: UIViewController {
         case "NewTweetSegue":
             let vc = segue.destinationViewController as! NewTweetViewController
             vc.user = User._currentUser
+            vc.delegate = self
         default:
             return
         }
@@ -107,5 +110,13 @@ extension TweetsViewController: UITableViewDataSource {
 }
 
 extension TweetsViewController: UITableViewDelegate {}
+
+extension TweetsViewController: NewTweetViewControllerDelegate {
+    func newTweetViewController(newTweetViewController: NewTweetViewController, didPostStatusUpdate tweet: Tweet) {
+        self.tweets.insert(tweet, atIndex: 0)
+        self.tableView.reloadData()
+    }
+
+}
 
 
