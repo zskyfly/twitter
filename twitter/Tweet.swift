@@ -10,24 +10,24 @@ import UIKit
 
 class Tweet: NSObject {
 
-    var text: NSString?
+    var text: String?
     var createdAt: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
     var user: User?
+    var idStr: String?
 
     init(dictionary: NSDictionary) {
         self.text = dictionary["text"] as? String
+        self.text = text?.stringByRemovingPercentEncoding
         self.retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-        self.favoriteCount = (dictionary["favourites_count"] as? Int) ?? 0
+        self.favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
+        self.idStr = dictionary["id_str"] as? String
         if let userDictionary = dictionary["user"] as? NSDictionary {
             self.user = User(dictionary: userDictionary)
         }
-        let createdAtString = dictionary["created_at"] as? String
-        if let createdAtString = createdAtString {
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "EEE MMM HH:mm:ss Z y"
-            self.createdAt = formatter.dateFromString(createdAtString)
+        if let createdAtString = dictionary["created_at"] as? String {
+            self.createdAt = DateTimeHelper.sharedInstance.convertStringToDate(createdAtString)
         }
     }
 
@@ -40,7 +40,11 @@ class Tweet: NSObject {
         return tweets
     }
 
-    func getCreatedAtString() -> String {
-        return ""
+    func getCreatedAtForDetail() -> String {
+        return DateTimeHelper.sharedInstance.getDateStringForDetailView(self.createdAt)
+    }
+
+    func getCreatedAtForList() -> String {
+        return DateTimeHelper.sharedInstance.getDateStringForListView(self.createdAt)
     }
 }

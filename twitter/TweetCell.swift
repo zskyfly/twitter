@@ -12,19 +12,22 @@ class TweetCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userScreenName: UILabel!
+    @IBOutlet weak var userHandleLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
 
     var tweet: Tweet! {
         didSet {
             if let user = tweet.user {
-                userImageView.setImageWithURL(user.profileUrl!)
+                ImageHelper.setImageForView(user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil, failure: nil)
                 userNameLabel.text = user.name as? String
-                userScreenName.text = "@\(user.screenName!)"
+                userHandleLabel.text = "@\(user.screenName!)"
             }
-            tweetTextLabel.text = tweet.text as? String
-//            createdAtLabel.text = tweet.createdAt as! String
+            if let text = tweet.text {
+                tweetTextLabel.text = text
+            }
+
+            createdAtLabel.text = tweet.getCreatedAtForList()
         }
     }
 
