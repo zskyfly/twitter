@@ -24,7 +24,7 @@ class TweetCell: UITableViewCell {
                 userHandleLabel.text = "@\(user.screenName!)"
             }
             tweetTextLabel.text = tweet.text as? String
-//            createdAtLabel.text = tweet.createdAt as! String
+            createdAtLabel.text = tweet.getCreatedAtForList()
         }
     }
 

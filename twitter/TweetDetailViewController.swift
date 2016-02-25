@@ -31,7 +31,7 @@ class TweetDetailViewController: UIViewController {
             userHandleLabel.text = "@\(user.screenName!)"
         }
         tweetTextLabel.text = self.tweet.text as? String
-            //            createdAtLabel.text = tweet.createdAt as! String
+        createdAtLabel.text = tweet.getCreatedAtForDetail()
         retweetCountLabel.text = "\(self.tweet.retweetCount)"
         likeCountLabel.text = "\(self.tweet.favoriteCount)"
     }

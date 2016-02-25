@@ -25,11 +25,10 @@ class Tweet: NSObject {
         if let userDictionary = dictionary["user"] as? NSDictionary {
             self.user = User(dictionary: userDictionary)
         }
-        let createdAtString = dictionary["created_at"] as? String
-        if let createdAtString = createdAtString {
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "EEE MMM HH:mm:ss Z y"
-            self.createdAt = formatter.dateFromString(createdAtString)
+        if let createdAtString = dictionary["created_at"] as? String {
+            self.createdAt = DateTimeHelper.sharedInstance.convertStringToDate(createdAtString)
+            let newString = DateTimeHelper.sharedInstance.convertDateToString(self.createdAt!, formatString: nil, formatStyle: DateTimeHelper.detailViewFormat)
+            print("converting \(createdAtString) to \(self.createdAt) and back to \(newString)")
         }
     }
 
@@ -42,7 +41,11 @@ class Tweet: NSObject {
         return tweets
     }
 
-    func getCreatedAtString() -> String {
-        return ""
+    func getCreatedAtForDetail() -> String {
+        return DateTimeHelper.sharedInstance.getDateStringForDetailView(self.createdAt)
+    }
+
+    func getCreatedAtForList() -> String {
+        return DateTimeHelper.sharedInstance.getDateStringForListView(self.createdAt)
     }
 }
