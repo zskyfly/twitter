@@ -10,6 +10,10 @@ import UIKit
 
 class Tweet: NSObject {
 
+    static let placeHolderText = "What's happening?"
+    static let maxLength = 140
+    static let acceptableLength = 1...maxLength
+
     var text: String?
     var createdAt: NSDate?
     var retweetCount: Int = 0

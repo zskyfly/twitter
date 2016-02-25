@@ -17,17 +17,17 @@ class TwitterClient: BDBOAuth1SessionManager {
     static let accessTokenPath = "oauth/access_token"
     static let callBackUrlScheme = "twitterephiphanies://oauth"
 
-    static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
-    static let statusesHomeTimeline = "1.1/statuses/home_timeline.json"
-    static let statusesUpdate = "1.1/statuses/update.json"
-    static func statusesRetweet (statusId: String) -> (String) {
+    static let accountVerifyCredentialsPath = "1.1/account/verify_credentials.json"
+    static let statusesHomeTimelinePath = "1.1/statuses/home_timeline.json"
+    static let statusesUpdatePath = "1.1/statuses/update.json"
+    static func statusesRetweetPathWithId (statusId: String) -> (String) {
         return "1.1/statuses/retweet/:id.json".stringByReplacingOccurrencesOfString("%id%", withString: statusId)
     }
-    static func statusesUnretweet (retweetStatusId: String) -> (String) {
+    static func statusesUnretweetPathWithId (retweetStatusId: String) -> (String) {
         return "1.1/statuses/unretweet/:id.json".stringByReplacingOccurrencesOfString("%id%", withString: retweetStatusId)
     }
-    static let favoriteCreate = "1.1/favorites/create.json"
-    static let favoriteDestroy = "1.1/favorites/destroy.json"
+    static let favoriteCreatePath = "1.1/favorites/create.json"
+    static let favoriteDestroyPath = "1.1/favorites/destroy.json"
 
     static let sharedInstance = TwitterClient(baseURL: NSURL(string: TwitterClient.baseUrl)!, consumerKey: TwitterClient.consumerKey, consumerSecret: TwitterClient.consumerSecret)
 
@@ -70,7 +70,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
 
     func homeTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
-        GET(TwitterClient.statusesHomeTimeline, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+        GET(TwitterClient.statusesHomeTimelinePath, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweetDictionaries = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(tweetDictionaries)
             success(tweets)
@@ -80,7 +80,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
 
     func currentAccount(success: (User) -> (), failure: (NSError) -> ()) {
-        GET(TwitterClient.accountVerifyCredentials, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+        GET(TwitterClient.accountVerifyCredentialsPath, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let userDictionary = response as! NSDictionary
             let user = User(dictionary: userDictionary)
             success(user)
@@ -98,7 +98,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             data["in_reply_to_status_id"] = replyStatusId
         }
 
-        POST(TwitterClient.statusesUpdate, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+        POST(TwitterClient.statusesUpdatePath, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweetDictionary = response as! NSDictionary
             let tweet = Tweet(dictionary: tweetDictionary)
             success?(tweet)
@@ -113,11 +113,11 @@ class TwitterClient: BDBOAuth1SessionManager {
             "id": statusId
         ]
 
-        POST(TwitterClient.favoriteCreate, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+        POST(TwitterClient.favoriteCreatePath, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let tweetDictionary = response as! NSDictionary
             let tweet = Tweet(dictionary: tweetDictionary)
             success?(tweet)
-            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure?(error)
         })
     }

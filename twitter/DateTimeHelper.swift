@@ -20,7 +20,7 @@ class DateTimeHelper: NSDateFormatter {
     static let secondsInMinute = 60.0
     static let secondsInHour = secondsInMinute * 60.0
     static let secondsInDay = secondsInHour * 24.0
-    static let hoursInWeek = 24.0 * 7.0
+    static let secondsInWeek = secondsInDay * 7.0
 
     enum TimeUnit {
         case Seconds, Minutes, Hours, Days
@@ -53,6 +53,10 @@ class DateTimeHelper: NSDateFormatter {
 
         let dateString = dateFormatter.stringFromDate(date)
         return dateString
+    }
+
+    func getSecondsBeforeNow(date: NSDate) -> Double {
+        return getTimeUnitFromNowToDate(date, timeUnit: TimeUnit.Seconds)
     }
 
     func getMinutesBeforeNow(date: NSDate) -> Double {
@@ -95,22 +99,34 @@ class DateTimeHelper: NSDateFormatter {
         var dateString = ""
 
         if let date = date {
-            let hoursAgo = getHoursBeforeNow(date)
+            let secondsAgo = getSecondsBeforeNow(date)
 
-            switch hoursAgo {
-            case 0..<1:
+            switch secondsAgo {
+
+            case 0..<DateTimeHelper.secondsInMinute:
+                dateString = "\(getRoundIntFromDouble(secondsAgo))s"
+
+            case DateTimeHelper.secondsInMinute..<DateTimeHelper.secondsInHour:
                 let minutesAgo = getMinutesBeforeNow(date)
-                dateString = "\(Int(round(minutesAgo)))m"
-            case 1..<23.5:
-                dateString = "\(Int(round(hoursAgo)))h"
-            case 23.5..<DateTimeHelper.hoursInWeek:
+                dateString = "\(getRoundIntFromDouble(minutesAgo))m"
+
+            case DateTimeHelper.secondsInHour..<DateTimeHelper.secondsInDay:
+                let hoursAgo = getHoursBeforeNow(date)
+                dateString = "\(getRoundIntFromDouble(hoursAgo))h"
+
+            case DateTimeHelper.secondsInDay..<DateTimeHelper.secondsInWeek:
                 let daysAgo = getDaysBeforeNow(date)
-                dateString = "\(Int(round((daysAgo))))d"
+                dateString = "\(getRoundIntFromDouble(daysAgo))d"
+
             default:
                 dateString = DateTimeHelper.sharedInstance.convertDateToString(date, formatStyle: DateTimeHelper.detailViewFormat, includeTime: false)
             }
         }
         return dateString
+    }
+
+    func getRoundIntFromDouble(num: Double) -> Int {
+        return Int(round(num))
     }
 
 }
