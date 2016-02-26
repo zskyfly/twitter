@@ -165,7 +165,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nOq-FK-T1t" id="xlM-7i-tKb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UyT-hL-EwL">
@@ -244,6 +244,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyN-pq-7MI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-627" y="1554"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="gPN-CB-lLn">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M81-4m-2ao" customClass="ProfileViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nce-qY-a9x"/>
+                        <viewControllerLayoutGuide type="bottom" id="y05-qy-Pq7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NB8-v6-sYY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sYk-VZ-mZd"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LEu-N3-AL9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-245" y="1554"/>
         </scene>
         <!--Tweet Detail-->
         <scene sceneID="OwV-Vm-xAe">
@@ -469,7 +489,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JR8-cb-pPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="876"/>
+            <point key="canvasLocation" x="292" y="1336"/>
         </scene>
         <!--New Tweet-->
         <scene sceneID="Fb6-u9-rVR">
@@ -568,7 +588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xdp-mM-KmC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="876"/>
+            <point key="canvasLocation" x="702" y="1336"/>
         </scene>
         <!--Hamburger View Controller-->
         <scene sceneID="R1c-wg-Zeg">
@@ -643,7 +663,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OyG-bw-PyF" id="Ab9-Zf-6p7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqF-r2-Chv">
@@ -722,6 +742,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLc-yh-MhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-999" y="876"/>
+        </scene>
+        <!--Content Navigation Controller-->
+        <scene sceneID="Zqk-hh-UwX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="77d-rX-2YU" customClass="ContentNavigationController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jj0-WQ-rkA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M81-4m-2ao" kind="relationship" relationship="rootViewController" id="ADb-an-J37"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gyE-OX-KFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-253" y="876"/>
         </scene>
     </scenes>
     <resources>
