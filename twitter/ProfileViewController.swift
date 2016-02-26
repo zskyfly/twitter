@@ -10,11 +10,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var user: User?
     @IBOutlet weak var userProfileView: UserProfileView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        userProfileView.user = User._currentUser
-//        navigationController?.hidesBarsOnTap = true
+        configureViewContent()
 
         // Do any additional setup after loading the view.
     }
@@ -26,18 +26,27 @@ class ProfileViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animateWithDuration(3.0, animations: { () -> Void in
+//        UIView.animateWithDuration(3.0, animations: { () -> Void in
 //            self.navigationController?.navigationBarHidden = true
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-        }, completion: nil)
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//        }, completion: nil)
 
     }
 
-    override func prefersStatusBarHidden() -> Bool {
-        return navigationController?.navigationBarHidden == true
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        return navigationController?.navigationBarHidden == true
+//    }
+//
+//    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+//        return UIStatusBarAnimation.Slide
+//    }
 
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return UIStatusBarAnimation.Slide
+    func configureViewContent() {
+        if let user = self.user {
+            userProfileView.user = user
+//            navigationController?.hidesBarsOnTap = true
+        } else {
+            userProfileView.user = User._currentUser
+        }
     }
 }

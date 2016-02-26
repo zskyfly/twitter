@@ -159,4 +159,10 @@ extension TweetsViewController: TweetCellDelegate {
         detailViewController.tweet = tweet
         showViewController(detailViewController, sender: self)
     }
+
+    func tweetCell(tweetCell: TweetCell, didTapUser user: User) {
+        let profileViewController = ContentControllerManager.initNewProfileViewController()
+        profileViewController.user = user
+        showViewController(profileViewController, sender: self)
+    }
 }

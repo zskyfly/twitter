@@ -18,16 +18,20 @@ class ContentControllerManager {
     struct ContentProperties {
         var menuLabel: String!
         var navControllerIdentifier: String!
+        var navBarColor: UIColor!
 
-        init(menuLabel: String, identifier: String) {
+        init(menuLabel: String, identifier: String, navBarColor: UIColor? = nil) {
             self.menuLabel = menuLabel
             self.navControllerIdentifier = identifier
+            if let navBarColor = navBarColor {
+                self.navBarColor = navBarColor
+            }
         }
     }
 
     static let contentItems: [ContentProperties] = [
-        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController"),        
         ContentProperties(menuLabel: "Home", identifier: "HomeTimelineNavigationController"),
+        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController", navBarColor: MiscHelper.getUIColor(MiscHelper.twitterDarkGrey)),
         ContentProperties(menuLabel: "Mentions", identifier: "MentionsTimelineNavigationController"),
     ]
 
@@ -108,7 +112,7 @@ class ContentControllerManager {
         navTitle: "Mentions",
         apiCall: TwitterClient.sharedInstance.mentionsTimeline,
         storyboardId: "MentionsTimelineViewController",
-        navBarColor: MiscHelper.getUIColor(MiscHelper.twitterMediumGrey)
+        navBarColor: MiscHelper.getUIColor(MiscHelper.twitterDarkGrey)
     )
 
     static func getTweetsControllerProperties(controllerType: TweetsControllerType) -> TweetsViewControllerProperties {
@@ -133,5 +137,10 @@ class ContentControllerManager {
     static func initNewTweetViewController() -> NewTweetViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewControllerWithIdentifier("NewTweetViewController") as! NewTweetViewController
+    }
+
+    static func initNewProfileViewController() -> ProfileViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
     }
 }

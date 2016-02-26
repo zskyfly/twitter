@@ -11,6 +11,7 @@ import UIKit
 
 @objc protocol TweetCellDelegate {
     optional func tweetCell(tweetCell: TweetCell, didSelectTweet tweet: Tweet)
+    optional func tweetCell(tweetCell: TweetCell, didTapUser user: User)
 }
 
 class TweetCell: UITableViewCell {
@@ -51,7 +52,8 @@ class TweetCell: UITableViewCell {
 
     private func configureCell() {
         ImageHelper.stylizeUserImageView(self.userImageView)
-        addTapGestureRecognizer()
+        addCellTapGestureRecognizer()
+        addUserTapGestureRecognizer()
     }
 
     private func stylizeCell() {
@@ -59,14 +61,25 @@ class TweetCell: UITableViewCell {
         userImageView.clipsToBounds = true
     }
 
-    private func addTapGestureRecognizer() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTap:"))
+    private func addCellTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTapCell:"))
         tapGestureRecognizer.delegate = self
         self.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    func onTap(sender: UITapGestureRecognizer? = nil) {
+    private func addUserTapGestureRecognizer() {
+        self.userImageView.userInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTapUser:"))
+        tapGestureRecognizer.delegate = self
+        self.userImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func onTapCell(sender: UITapGestureRecognizer? = nil) {
         self.delegate?.tweetCell!(self, didSelectTweet: self.tweet)
+    }
+
+    func onTapUser(sender: UITapGestureRecognizer? = nil) {
+        self.delegate?.tweetCell!(self, didTapUser: (self.tweet?.user)!)
     }
 
 }
