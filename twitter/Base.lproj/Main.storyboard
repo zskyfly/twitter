@@ -256,14 +256,29 @@
                     <view key="view" contentMode="scaleToFill" id="NB8-v6-sYY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izt-fy-FMz" customClass="UserProfileView" customModule="twitter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="izt-fy-FMz" secondAttribute="trailing" id="5Ci-lI-fmd"/>
+                            <constraint firstItem="izt-fy-FMz" firstAttribute="top" secondItem="NB8-v6-sYY" secondAttribute="top" id="F0P-Kh-gkX"/>
+                            <constraint firstItem="y05-qy-Pq7" firstAttribute="top" secondItem="izt-fy-FMz" secondAttribute="bottom" id="JIE-7a-zAV"/>
+                            <constraint firstItem="izt-fy-FMz" firstAttribute="leading" secondItem="NB8-v6-sYY" secondAttribute="leading" id="qxz-Wx-PJS"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sYk-VZ-mZd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="userProfileView" destination="izt-fy-FMz" id="ty0-9q-9IY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEu-N3-AL9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-245" y="1554"/>
+            <point key="canvasLocation" x="-253" y="1554"/>
         </scene>
         <!--Tweet Detail-->
         <scene sceneID="OwV-Vm-xAe">
@@ -743,10 +758,10 @@
             </objects>
             <point key="canvasLocation" x="-999" y="876"/>
         </scene>
-        <!--Content Navigation Controller-->
+        <!--Profile Navigation Controller-->
         <scene sceneID="Zqk-hh-UwX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="77d-rX-2YU" customClass="ContentNavigationController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="77d-rX-2YU" userLabel="Profile Navigation Controller" customClass="ContentNavigationController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jj0-WQ-rkA">

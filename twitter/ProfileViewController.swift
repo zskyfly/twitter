@@ -10,8 +10,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var userProfileView: UserProfileView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = true
+        userProfileView.user = User._currentUser
 
         // Do any additional setup after loading the view.
     }

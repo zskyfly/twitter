@@ -27,14 +27,14 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="egf-CH-fqR">
-                            <rect key="frame" x="136" y="40" width="48" height="48"/>
+                            <rect key="frame" x="135.5" y="40" width="48" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="48" id="XLW-YM-enb"/>
                                 <constraint firstAttribute="height" constant="48" id="vXr-Bb-xlt"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zachary Matthews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-SJ-lLf">
-                            <rect key="frame" x="84" y="100" width="153" height="21"/>
+                            <rect key="frame" x="83.5" y="100" width="153" height="20.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="RB8-CF-E7o" secondAttribute="bottom" id="0NH-eS-eHV"/>
                         <constraint firstItem="GX1-SJ-lLf" firstAttribute="centerX" secondItem="Acm-Ep-B34" secondAttribute="centerX" id="14Z-R2-74A"/>

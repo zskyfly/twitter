@@ -32,7 +32,7 @@ class UserProfileView: UIView {
                 }
             }
             self.userNameLabel.text = user.name as? String
-            self.userHandleLabel.text = user.screenName as? String
+            self.userHandleLabel.text = "@" + (user.screenName as?String)!
         }
     }
 
