@@ -13,25 +13,12 @@ class TweetsViewController: UIViewController {
 
     var controllerProperties: ContentControllerManager.TweetsViewControllerProperties!
     var tweets: [Tweet]!
-
-    let estimated_row_height: CGFloat = 100.0
-
-
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         initControllerProperties()
-
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        tableView.addPullToRefreshWithActionHandler { () -> Void in
-            self.reloadTweets()
-            self.tableView.pullToRefreshView.stopAnimating()
-        }
-
-        print("\(self.restorationIdentifier)")
         self.reloadTweets()
     }
 
@@ -39,10 +26,8 @@ class TweetsViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func onLogoutButton(sender: AnyObject) {
@@ -51,12 +36,6 @@ class TweetsViewController: UIViewController {
 
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -78,34 +57,39 @@ class TweetsViewController: UIViewController {
         default:
             return
         }
-
-
     }
 
-    func reloadTweets() {
+    private func reloadTweets() {
         self.controllerProperties.apiCall(success: reloadSuccessClosure,
             failure: reloadFailureClosure)
     }
 
-    func reloadSuccessClosure(tweets:[Tweet]) -> () {
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = self.estimated_row_height
+    private func reloadSuccessClosure(tweets:[Tweet]) -> () {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = self.controllerProperties.estimatedRowHight
         self.tweets = tweets
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
-    func reloadFailureClosure(error: NSError) -> () {
+    private func reloadFailureClosure(error: NSError) -> () {
         print("\(error.localizedDescription)")
     }
 
-    func initControllerProperties() {
-        if let storyboardId = self.restorationIdentifier {
-            let controllerType = ContentControllerManager.TweetsControllerType(rawValue: storyboardId)
-            self.controllerProperties = ContentControllerManager.getTweetsControllerProperties(controllerType!)
-        }
-        self.navigationItem.title = self.controllerProperties.navTitle
-    }
+    private func initControllerProperties() {
+        let storyboardId = self.restorationIdentifier!
+        let controllerType = ContentControllerManager.TweetsControllerType(rawValue: storyboardId)
+        self.controllerProperties = ContentControllerManager.getTweetsControllerProperties(controllerType!)
 
+        navigationItem.title = self.controllerProperties.navTitle
+        self.navigationController?.navigationBar.backgroundColor = self.controllerProperties.navBarColor
+
+        tableView.addPullToRefreshWithActionHandler { () -> Void in
+            self.reloadTweets()
+            self.tableView.pullToRefreshView.stopAnimating()
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource {
@@ -130,7 +114,7 @@ extension TweetsViewController: UITableViewDelegate {}
 extension TweetsViewController: NewTweetViewControllerDelegate {
     func newTweetViewController(newTweetViewController: NewTweetViewController, didPostStatusUpdate tweet: Tweet) {
         self.tweets.insert(tweet, atIndex: 0)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
 }

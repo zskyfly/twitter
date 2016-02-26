@@ -13,20 +13,21 @@ class ContentControllerManager {
 
     static let loginTransitionDuration = 0.5
 
+    // MARK: - Hamburger Menu Configuration
+
     struct ContentProperties {
+        var menuLabel: String!
+        var navControllerIdentifier: String!
 
         init(menuLabel: String, identifier: String) {
             self.menuLabel = menuLabel
             self.navControllerIdentifier = identifier
         }
-
-        var menuLabel: String!
-        var navControllerIdentifier: String!
     }
 
     static let contentItems: [ContentProperties] = [
-        ContentProperties(menuLabel: "Home Timeline", identifier: "HomeTimelineNavigationController"),
-        ContentProperties(menuLabel: "Mentions Timeline", identifier: "MentionsTimelineNavigationController"),
+        ContentProperties(menuLabel: "Home", identifier: "HomeTimelineNavigationController"),
+        ContentProperties(menuLabel: "Mentions", identifier: "MentionsTimelineNavigationController"),
     ]
 
     class func initContentNavigationControllers(storyboard: UIStoryboard) -> [ContentNavigationController] {
@@ -47,6 +48,7 @@ class ContentControllerManager {
 
         let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
         let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+
         menuViewController.hamburgerViewController = hamburgerViewController
         hamburgerViewController.menuViewController = menuViewController
 
@@ -54,16 +56,17 @@ class ContentControllerManager {
             window!,
             duration: ContentControllerManager.loginTransitionDuration,
             options: UIViewAnimationOptions.TransitionFlipFromRight,
-            animations: { () -> Void in
+            animations: {
+                () -> Void in
                 window?.rootViewController = hamburgerViewController
             },
             completion: nil
         )
-
     }
 
-    let homeTimelineId = "HomeTimelineViewController"
-    let mentionsTimelineId = "MentionsTimelineViewController"
+    /*
+    // MARK: - Reusable TweetsViewController
+    */
 
     enum TweetsControllerType: String {
         case Home = "HomeTimelineViewController"
@@ -71,18 +74,27 @@ class ContentControllerManager {
     }
 
     struct TweetsViewControllerProperties {
+        var navTitle: String!
+        var apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
+        var storyboardId: String!
+        var navBarColor: UIColor!
+
+        // properties shared by all TweetsViewControllers
+        let estimatedRowHight: CGFloat = 100.0
+
         init(navTitle: String,
             apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
-            storyboardId: String
+            storyboardId: String,
+            navBarColor: UIColor? = nil
         ) {
             self.navTitle = navTitle
             self.apiCall = apiCall
             self.storyboardId = storyboardId
+            self.navBarColor = MiscHelper.getUIColor(MiscHelper.twitterBlue)
+            if let navBarColor = navBarColor {
+                self.navBarColor = navBarColor
+            }
         }
-
-        var navTitle: String!
-        var apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
-        var storyboardId: String!
     }
 
     static let homeTimelineProperties = TweetsViewControllerProperties(
@@ -94,7 +106,8 @@ class ContentControllerManager {
     static let mentionsTimelineProperties = TweetsViewControllerProperties(
         navTitle: "Mentions",
         apiCall: TwitterClient.sharedInstance.mentionsTimeline,
-        storyboardId: "MentionsTimelineViewController"
+        storyboardId: "MentionsTimelineViewController",
+        navBarColor: MiscHelper.getUIColor(MiscHelper.twitterMediumGrey)
     )
 
     static func getTweetsControllerProperties(controllerType: TweetsControllerType) -> TweetsViewControllerProperties {
