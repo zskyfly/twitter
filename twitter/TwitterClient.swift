@@ -70,30 +70,24 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
-    func homeTimeline(maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
-        var data: NSDictionary? = nil
-        if let maxId = maxId {
-            data = [
-                "max_id": Int(maxId)!
-            ]
-        }
-        getTimeline(TwitterClient.statusesHomeTimelinePath, parameters: data, success: success, failure: failure)
+    func homeTimeline(oldestTweet: Tweet?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+
+        getTimeline(TwitterClient.statusesHomeTimelinePath, oldestTweet: oldestTweet, success: success, failure: failure)
     }
 
-    func mentionsTimeline(maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
-        var data: NSDictionary? = nil
-        if let maxId = maxId {
-            data = [
-                "max_id": Int(maxId)!
-            ]
-        }
-        getTimeline(TwitterClient.statusesMentionsTimelinePath, parameters: data, success: success, failure: failure)
+    func mentionsTimeline(oldestTweet: Tweet?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+        getTimeline(TwitterClient.statusesMentionsTimelinePath, oldestTweet: oldestTweet, success: success, failure: failure)
     }
 
-    private func getTimeline(urlString: String, parameters: NSDictionary?, success: (([Tweet]) -> ())?, failure: ((NSError) -> ())?) {
-        print("\(urlString)\(parameters)")
+    private func getTimeline(urlString: String, oldestTweet: Tweet?, success: (([Tweet]) -> ())?, failure: ((NSError) -> ())?) {
+        var data: NSDictionary? = nil
+
+        if let oldestTweet = oldestTweet {
+            data = ["max_id": oldestTweet.id! - 1]
+        }
+
         GET(urlString,
-            parameters: parameters,
+            parameters: data,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 let tweetDictionaries = response as! [NSDictionary]

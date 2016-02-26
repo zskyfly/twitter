@@ -30,49 +30,34 @@ class TweetsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    @IBAction func onLogoutButton(sender: AnyObject) {
-        TwitterClient.sharedInstance.logout()
-    }
 
     /*
     // MARK: - Navigation
     */
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let identifier = segue.identifier!
+    func onTapLogout(sender: AnyObject) {
+        TwitterClient.sharedInstance.logout()
+    }
 
-        switch identifier {
-        case "DetailViewSegue":
-            let cell = sender as! TweetCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let row = indexPath!.row
-            let tweet = self.tweets[row]
-            let vc = segue.destinationViewController as! TweetDetailViewController
-            vc.tweet = tweet
-            tableView.deselectRowAtIndexPath(indexPath!, animated: true)
-        case "NewTweetSegue":
-            let vc = segue.destinationViewController as! NewTweetViewController
-            vc.user = User._currentUser
-            vc.delegate = self
-        default:
-            return
-        }
+    func onTapNew(sender: AnyObject) {
+        let newVc = ContentControllerManager.initNewTweetViewController()
+        newVc.user = User._currentUser
+        newVc.delegate = self
+        showViewController(newVc, sender: self)
     }
 
     /*
     // MARK: - Load Tweets Functionality
     */
 
-    private func loadTweets(getMore: Bool = false) {
-        var oldestId: String? = nil
+    private func loadTweets(beforeOldestTweet: Tweet? = nil) {
         var successClosure = reloadSuccessClosure
 
-        if getMore {
-            oldestId = getOldestTweetId()
+        if beforeOldestTweet != nil {
             successClosure = appendSuccessClosure
         }
-        print("tweets first \(getNewestTweetId()) last \(getOldestTweetId())")
-        self.controllerProperties.apiCall(maxId: oldestId, success: successClosure,
+
+        self.controllerProperties.apiCall(oldestTweet: beforeOldestTweet, success: successClosure,
             failure: loadFailureClosure)
     }
 
@@ -86,7 +71,6 @@ class TweetsViewController: UIViewController {
         self.tweets.appendContentsOf(tweets)
         loadSuccess()
         tableView.infiniteScrollingView.stopAnimating()
-        tableView.addInfiniteScrollingWithActionHandler(infiniteScrollingActionHandler)
     }
 
     private func loadSuccess() {
@@ -117,6 +101,15 @@ class TweetsViewController: UIViewController {
         tableView.addInfiniteScrollingWithActionHandler(infiniteScrollingActionHandler)
         tableView.delegate = self
         tableView.dataSource = self
+
+        initNavButtons()
+    }
+
+    private func initNavButtons() {
+        let newButton = UIBarButtonItem(title: "New", style: .Plain, target: self, action: Selector("onTapNew:"))
+        let logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: Selector("onTapLogout:"))
+        self.navigationItem.rightBarButtonItem = newButton
+        self.navigationItem.leftBarButtonItem = logoutButton
     }
 
     private func pullToRefreshActionHandler() {
@@ -124,15 +117,11 @@ class TweetsViewController: UIViewController {
     }
 
     private func infiniteScrollingActionHandler() {
-        loadTweets(true)
+        loadTweets(getOldestTweet())
     }
 
-    private func getOldestTweetId() -> String? {
-        return self.tweets?.last?.idStr
-    }
-
-    private func getNewestTweetId() -> String? {
-        return self.tweets?.first?.idStr
+    private func getOldestTweet() -> Tweet? {
+        return self.tweets?.last
     }
 }
 
@@ -149,6 +138,7 @@ extension TweetsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         let tweet = self.tweets[indexPath.row]
         cell.tweet = tweet
+        cell.delegate = self
         return cell
     }
 }
@@ -163,4 +153,10 @@ extension TweetsViewController: NewTweetViewControllerDelegate {
 
 }
 
-
+extension TweetsViewController: TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, didSelectTweet tweet: Tweet) {
+        let detailViewController = ContentControllerManager.initTweetDetailViewController()
+        detailViewController.tweet = tweet
+        showViewController(detailViewController, sender: self)
+    }
+}

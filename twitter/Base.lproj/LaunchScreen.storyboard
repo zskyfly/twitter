@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter_logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="Y7Y-TH-2xk">
-                                <rect key="frame" x="276" y="276" width="48" height="48"/>
+                                <rect key="frame" x="136" y="260" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="apA-XK-c6X"/>
                                     <constraint firstAttribute="width" constant="48" id="idj-Bk-XfQ"/>
@@ -31,6 +31,7 @@
                             <constraint firstItem="Y7Y-TH-2xk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iL7-7W-7CQ"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

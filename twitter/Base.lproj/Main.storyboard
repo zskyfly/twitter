@@ -135,18 +135,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="hfz-kt-rwE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Qc7-bJ-kmb">
-                            <connections>
-                                <action selector="onLogoutButton:" destination="TB8-zC-JzG" id="Cha-xD-56m"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="vNc-7I-UZz">
-                            <connections>
-                                <action selector="onNewButton:" destination="TB8-zC-JzG" id="mKi-xe-7Tk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hfz-kt-rwE"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="ceJ-KP-McI" id="KDf-1S-FGk"/>
@@ -232,7 +221,6 @@
                                             <outlet property="userHandleLabel" destination="PrM-I4-Npv" id="NI4-Yo-rDD"/>
                                             <outlet property="userImageView" destination="UyT-hL-EwL" id="cAD-sO-5Ot"/>
                                             <outlet property="userNameLabel" destination="2HH-M0-Oj5" id="fbU-lN-b6S"/>
-                                            <segue destination="psI-ki-wcc" kind="show" identifier="DetailViewSegue" id="pRH-Pv-PLG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -247,19 +235,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="7Qb-og-n6J">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="bMj-6N-b3d">
-                            <connections>
-                                <action selector="onLogoutButton:" destination="TB8-zC-JzG" id="Fqs-cS-BXs"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="Esl-Xv-ncS">
-                            <connections>
-                                <action selector="onNewButton:" destination="TB8-zC-JzG" id="QCb-Cw-ndo"/>
-                                <segue destination="1fv-uG-iPW" kind="show" identifier="NewTweetSegue" id="aVO-rx-VUp"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="7Qb-og-n6J"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="wic-nl-D81" id="SHr-1j-U8T"/>
@@ -272,7 +248,7 @@
         <!--Tweet Detail-->
         <scene sceneID="OwV-Vm-xAe">
             <objects>
-                <viewController title="Tweet Detail" id="psI-ki-wcc" customClass="TweetDetailViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TweetDetailViewController" title="Tweet Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="psI-ki-wcc" customClass="TweetDetailViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dUH-Zr-ndE"/>
                         <viewControllerLayoutGuide type="bottom" id="1ih-Yu-805"/>
@@ -498,7 +474,7 @@
         <!--New Tweet-->
         <scene sceneID="Fb6-u9-rVR">
             <objects>
-                <viewController title="New Tweet" id="1fv-uG-iPW" customClass="NewTweetViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewTweetViewController" title="New Tweet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1fv-uG-iPW" customClass="NewTweetViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lw4-eN-vZr"/>
                         <viewControllerLayoutGuide type="bottom" id="sca-iW-y6F"/>
@@ -508,26 +484,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s3N-7n-7WN">
-                                <rect key="frame" x="8" y="72" width="48" height="48"/>
+                                <rect key="frame" x="8" y="28" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="5yc-bL-lo7"/>
                                     <constraint firstAttribute="width" constant="48" id="mOj-YU-tCw"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zachary Matthews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xt-fS-rh4">
-                                <rect key="frame" x="63" y="72" width="120.5" height="16"/>
+                                <rect key="frame" x="63" y="28" width="120.5" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@zsky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H64-lw-al3">
-                                <rect key="frame" x="63" y="88" width="34.5" height="13.5"/>
+                                <rect key="frame" x="63" y="44" width="34.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FyT-n4-Xv6">
-                                <rect key="frame" x="8" y="128" width="304" height="186"/>
+                                <rect key="frame" x="8" y="84" width="304" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
@@ -537,7 +513,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAr-Zm-536">
-                                <rect key="frame" x="237" y="322" width="75" height="29"/>
+                                <rect key="frame" x="237" y="278" width="75" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="eoQ-IT-tPN"/>
                                 </constraints>
@@ -551,7 +527,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLY-XJ-bVw">
-                                <rect key="frame" x="283" y="72" width="28.5" height="20.5"/>
+                                <rect key="frame" x="283" y="28" width="28.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -755,8 +731,5 @@
         <image name="retweet-action" width="75" height="72"/>
         <image name="retweet-action-on-pressed" width="75" height="72"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="aVO-rx-VUp"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -75,7 +75,7 @@ class ContentControllerManager {
 
     struct TweetsViewControllerProperties {
         var navTitle: String!
-        var apiCall: (maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
+        var apiCall: (oldestTweet: Tweet?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
         var storyboardId: String!
         var navBarColor: UIColor!
 
@@ -83,7 +83,7 @@ class ContentControllerManager {
         let estimatedRowHight: CGFloat = 100.0
 
         init(navTitle: String,
-            apiCall: (maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
+            apiCall: (oldestTweet: Tweet?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
             storyboardId: String,
             navBarColor: UIColor? = nil
         ) {
@@ -118,5 +118,19 @@ class ContentControllerManager {
         case .Mentions:
             return mentionsTimelineProperties
         }
+    }
+
+    /*
+    // MARK: - Instantiate and return view controllers
+    */
+
+    static func initTweetDetailViewController() -> TweetDetailViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier("TweetDetailViewController") as! TweetDetailViewController
+    }
+
+    static func initNewTweetViewController() -> NewTweetViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier("NewTweetViewController") as! NewTweetViewController
     }
 }

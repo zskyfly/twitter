@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+@objc protocol TweetCellDelegate {
+    optional func tweetCell(tweetCell: TweetCell, didSelectTweet tweet: Tweet)
+}
+
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
@@ -31,17 +36,37 @@ class TweetCell: UITableViewCell {
         }
     }
 
+    var delegate: TweetCellDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        userImageView.layer.cornerRadius = 3
-        userImageView.clipsToBounds = true
+        configureCell()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    private func configureCell() {
+        stylizeCell()
+        addTapGestureRecognizer()
+    }
+
+    private func stylizeCell() {
+        userImageView.layer.cornerRadius = 3
+        userImageView.clipsToBounds = true
+    }
+
+    private func addTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTap:"))
+        tapGestureRecognizer.delegate = self
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func onTap(sender: UITapGestureRecognizer? = nil) {
+        self.delegate?.tweetCell!(self, didSelectTweet: self.tweet)
     }
 
 }
