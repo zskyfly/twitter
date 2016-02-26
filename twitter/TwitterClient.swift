@@ -75,8 +75,18 @@ class TwitterClient: BDBOAuth1SessionManager {
             let tweetDictionaries = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(tweetDictionaries)
             success(tweets)
-        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-            failure(error)
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure(error)
+        })
+    }
+
+    func mentionsTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+        GET(TwitterClient.statusesMentionsTimelinePath, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweetDictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(tweetDictionaries)
+            success(tweets)
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure(error)
         })
     }
 

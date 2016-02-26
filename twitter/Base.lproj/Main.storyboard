@@ -159,7 +159,7 @@
         <!--Home Timeline View Controller-->
         <scene sceneID="XZg-1P-5qg">
             <objects>
-                <viewController storyboardIdentifier="HomeTimelineViewController" title="Tweets" id="TB8-zC-JzG" userLabel="Home Timeline View Controller" customClass="TweetsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeTimelineViewController" title="Tweets" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TB8-zC-JzG" userLabel="Home Timeline View Controller" customClass="TweetsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kGY-fb-97H"/>
                         <viewControllerLayoutGuide type="bottom" id="OTb-0J-q5j"/>

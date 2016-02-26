@@ -61,4 +61,49 @@ class ContentControllerManager {
         )
 
     }
+
+    let homeTimelineId = "HomeTimelineViewController"
+    let mentionsTimelineId = "MentionsTimelineViewController"
+
+    enum TweetsControllerType: String {
+        case Home = "HomeTimelineViewController"
+        case Mentions = "MentionsTimelineViewController"
+    }
+
+    struct TweetsViewControllerProperties {
+        init(navTitle: String,
+            apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
+            storyboardId: String
+        ) {
+            self.navTitle = navTitle
+            self.apiCall = apiCall
+            self.storyboardId = storyboardId
+        }
+
+        var navTitle: String!
+        var apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
+        var storyboardId: String!
+    }
+
+    static let homeTimelineProperties = TweetsViewControllerProperties(
+        navTitle: "Home",
+        apiCall: TwitterClient.sharedInstance.homeTimeline,
+        storyboardId: "HomeTimelineViewController"
+    )
+
+    static let mentionsTimelineProperties = TweetsViewControllerProperties(
+        navTitle: "Mentions",
+        apiCall: TwitterClient.sharedInstance.mentionsTimeline,
+        storyboardId: "MentionsTimelineViewController"
+    )
+
+    static func getTweetsControllerProperties(controllerType: TweetsControllerType) -> TweetsViewControllerProperties {
+        switch controllerType {
+        case .Home:
+            return homeTimelineProperties
+
+        case .Mentions:
+            return mentionsTimelineProperties
+        }
+    }
 }

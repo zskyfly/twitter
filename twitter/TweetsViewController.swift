@@ -11,7 +11,9 @@ import SVPullToRefresh
 
 class TweetsViewController: UIViewController {
 
+    var controllerProperties: ContentControllerManager.TweetsViewControllerProperties!
     var tweets: [Tweet]!
+
     let estimated_row_height: CGFloat = 100.0
 
 
@@ -19,6 +21,8 @@ class TweetsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initControllerProperties()
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -27,8 +31,7 @@ class TweetsViewController: UIViewController {
             self.tableView.pullToRefreshView.stopAnimating()
         }
 
-        self.navigationItem.title = User._currentUser?.timeLineTitle
-
+        print("\(self.restorationIdentifier)")
         self.reloadTweets()
     }
 
@@ -80,14 +83,27 @@ class TweetsViewController: UIViewController {
     }
 
     func reloadTweets() {
-        TwitterClient.sharedInstance.homeTimeline({ (tweets:[Tweet]) -> () in
-            self.tableView.rowHeight = UITableViewAutomaticDimension
-            self.tableView.estimatedRowHeight = self.estimated_row_height
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }) { (error: NSError) -> () in
-            print("\(error.localizedDescription)")
+        self.controllerProperties.apiCall(success: reloadSuccessClosure,
+            failure: reloadFailureClosure)
+    }
+
+    func reloadSuccessClosure(tweets:[Tweet]) -> () {
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = self.estimated_row_height
+        self.tweets = tweets
+        self.tableView.reloadData()
+    }
+
+    func reloadFailureClosure(error: NSError) -> () {
+        print("\(error.localizedDescription)")
+    }
+
+    func initControllerProperties() {
+        if let storyboardId = self.restorationIdentifier {
+            let controllerType = ContentControllerManager.TweetsControllerType(rawValue: storyboardId)
+            self.controllerProperties = ContentControllerManager.getTweetsControllerProperties(controllerType!)
         }
+        self.navigationItem.title = self.controllerProperties.navTitle
     }
 
 }
