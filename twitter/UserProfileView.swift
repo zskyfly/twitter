@@ -16,8 +16,10 @@ class UserProfileView: UIView {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userHandleLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var tweetCountLabel: UILabel!
+    @IBOutlet weak var followerCountLabel: UILabel!
 
-
+    @IBOutlet weak var followingCountLabel: UILabel!
     var user: User! {
         didSet {
             if let backgroundImageUrl = user.profileBackgroundImageUrl {
@@ -33,6 +35,9 @@ class UserProfileView: UIView {
             }
             self.userNameLabel.text = user.name as? String
             self.userHandleLabel.text = "@" + (user.screenName as?String)!
+            self.followerCountLabel.text = "\(user.followersCount)"
+            self.followingCountLabel.text = "\(user.friendsCount)"
+            self.tweetCountLabel.text = "\(user.tweetCount)"
         }
     }
 
@@ -54,6 +59,7 @@ class UserProfileView: UIView {
         self.userImageView.clipsToBounds = true
         self.backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         self.backgroundImageView.clipsToBounds = true
+        ImageHelper.stylizeUserImageView(self.userImageView)
         addSubview(contentView)
     }
 }

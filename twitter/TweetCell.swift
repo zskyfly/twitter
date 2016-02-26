@@ -50,7 +50,7 @@ class TweetCell: UITableViewCell {
     }
 
     private func configureCell() {
-        stylizeCell()
+        ImageHelper.stylizeUserImageView(self.userImageView)
         addTapGestureRecognizer()
     }
 

@@ -27,4 +27,9 @@ class ImageHelper {
             imageView.image = placeholder
         }
     }
+
+    static func stylizeUserImageView(view: UIImageView) {
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+    }
 }

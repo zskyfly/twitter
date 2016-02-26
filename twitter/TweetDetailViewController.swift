@@ -26,8 +26,7 @@ class TweetDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userImageView.layer.cornerRadius = 3
-        userImageView.clipsToBounds = true
+        ImageHelper.stylizeUserImageView(self.userImageView)
 
         if let user = self.tweet.user {
             ImageHelper.setImageForView(user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil, failure: nil)

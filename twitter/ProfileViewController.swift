@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userProfileView.user = User._currentUser
-        navigationController?.hidesBarsOnTap = true
+//        navigationController?.hidesBarsOnTap = true
 
         // Do any additional setup after loading the view.
     }

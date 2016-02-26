@@ -18,9 +18,6 @@ class Tweet: NSObject {
     var createdAt: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
-    var followersCount: Int = 0
-    var friendsCount: Int = 0
-    var tweetCount: Int = 0
     var user: User?
     var idStr: String?
     var id: Int?
@@ -31,9 +28,6 @@ class Tweet: NSObject {
         self.text = text?.stringByRemovingPercentEncoding
         self.retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         self.favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
-        self.followersCount = (dictionary["followers_count"] as? Int) ?? 0
-        self.friendsCount = (dictionary["friends_count"] as? Int) ?? 0
-        self.tweetCount = (dictionary["statuses_count"] as? Int) ?? 0
         self.idStr = dictionary["id_str"] as? String
         self.id = dictionary["id"] as? Int
         if let userDictionary = dictionary["user"] as? NSDictionary {

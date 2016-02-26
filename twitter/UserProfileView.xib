@@ -9,7 +9,10 @@
             <connections>
                 <outlet property="backgroundImageView" destination="RB8-CF-E7o" id="t6g-d3-Z4z"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="uht-1m-NnL"/>
+                <outlet property="followerCountLabel" destination="yOM-XJ-2EJ" id="EeT-pJ-GPF"/>
+                <outlet property="followingCountLabel" destination="VF9-yQ-Dw6" id="B0h-CU-S2e"/>
                 <outlet property="topContainerView" destination="Acm-Ep-B34" id="6ge-IC-r53"/>
+                <outlet property="tweetCountLabel" destination="znK-ls-eTk" id="pBD-Y6-2BE"/>
                 <outlet property="userHandleLabel" destination="1K8-q5-nlM" id="c8U-KP-BwW"/>
                 <outlet property="userImageView" destination="egf-CH-fqR" id="KfL-AW-Sd9"/>
                 <outlet property="userNameLabel" destination="GX1-SJ-lLf" id="LrX-Ey-V32"/>
@@ -37,13 +40,13 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zachary Matthews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-SJ-lLf">
-                                    <rect key="frame" x="84" y="100" width="153" height="20.5"/>
+                                    <rect key="frame" x="84" y="100" width="153" height="21"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@zsky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1K8-q5-nlM">
-                                    <rect key="frame" x="141" y="124.5" width="37" height="14.5"/>
+                                    <rect key="frame" x="141" y="125" width="37" height="14"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>

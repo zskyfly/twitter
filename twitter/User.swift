@@ -25,6 +25,9 @@ class User: NSObject {
     var timeLineTitle: String?
     var profileBackgroundColor: String?
     var profileDescription: String?
+    var followersCount: Int = 0
+    var friendsCount: Int = 0
+    var tweetCount: Int = 0
 
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -42,6 +45,10 @@ class User: NSObject {
             self.profileBackgroundImageUrl = NSURL(string: profileBackgroundImageUrlString)
         }
         self.profileDescription = dictionary["description"] as? String
+
+        self.followersCount = (dictionary["followers_count"] as? Int) ?? 0
+        self.friendsCount = (dictionary["friends_count"] as? Int) ?? 0
+        self.tweetCount = (dictionary["statuses_count"] as? Int) ?? 0
     }
 
     class var currentUser: User? {
