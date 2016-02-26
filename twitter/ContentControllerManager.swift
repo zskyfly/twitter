@@ -26,9 +26,9 @@ class ContentControllerManager {
     }
 
     static let contentItems: [ContentProperties] = [
+        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController"),        
         ContentProperties(menuLabel: "Home", identifier: "HomeTimelineNavigationController"),
         ContentProperties(menuLabel: "Mentions", identifier: "MentionsTimelineNavigationController"),
-        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController"),
     ]
 
     class func initContentNavigationControllers(storyboard: UIStoryboard) -> [ContentNavigationController] {

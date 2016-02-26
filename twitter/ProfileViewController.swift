@@ -13,8 +13,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userProfileView: UserProfileView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
         userProfileView.user = User._currentUser
+        navigationController?.hidesBarsOnTap = true
 
         // Do any additional setup after loading the view.
     }
@@ -23,16 +23,21 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animateWithDuration(3.0, animations: { () -> Void in
+//            self.navigationController?.navigationBarHidden = true
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }, completion: nil)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
 
+    override func prefersStatusBarHidden() -> Bool {
+        return navigationController?.navigationBarHidden == true
+    }
+
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return UIStatusBarAnimation.Slide
+    }
 }
