@@ -20,8 +20,11 @@ class User: NSObject {
     var name: NSString?
     var screenName: NSString?
     var profileUrl: NSURL?
+    var profileBackgroundImageUrl: NSURL?
     var tagLine: NSString?
     var timeLineTitle: String?
+    var profileBackgroundColor: String?
+    var profileDescription: String?
 
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -34,7 +37,11 @@ class User: NSObject {
         if let screenName = self.screenName {
             self.timeLineTitle = "@\(screenName)"
         }
-
+        self.profileBackgroundColor = dictionary["profile_background_color"] as? String
+        if let profileBackgroundImageUrlString = dictionary["profile_background_image_url_https"] as? String {
+            self.profileBackgroundImageUrl = NSURL(string: profileBackgroundImageUrlString)
+        }
+        self.profileDescription = dictionary["description"] as? String
     }
 
     class var currentUser: User? {
