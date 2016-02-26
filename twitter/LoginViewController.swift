@@ -29,10 +29,7 @@ class LoginViewController: UIViewController {
     @IBAction func onLoginButton(sender: AnyObject) {
 
         TwitterClient.sharedInstance.login({ () -> () in
-            let hamburgerViewController = ContentControllerManager.initHamburger()
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window!.rootViewController = hamburgerViewController
-            self.performSegueWithIdentifier("loginSegue", sender: self)
+            ContentControllerManager.initHamburger()
         }, failure:
         { (error: NSError) -> () in
                 print("Failure logging in \(error.localizedDescription)")

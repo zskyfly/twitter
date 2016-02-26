@@ -19,6 +19,7 @@ class TwitterClient: BDBOAuth1SessionManager {
 
     static let accountVerifyCredentialsPath = "1.1/account/verify_credentials.json"
     static let statusesHomeTimelinePath = "1.1/statuses/home_timeline.json"
+    static let statusesMentionsTimelinePath = "1.1/statuses/mentions_timeline.json"
     static let statusesUpdatePath = "1.1/statuses/update.json"
     static func statusesRetweetPathWithId (statusId: String) -> (String) {
         return "1.1/statuses/retweet/:id.json".stringByReplacingOccurrencesOfString("%id%", withString: statusId)
@@ -98,13 +99,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             data["in_reply_to_status_id"] = replyStatusId
         }
 
-        POST(TwitterClient.statusesUpdatePath, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweetDictionary = response as! NSDictionary
-            let tweet = Tweet(dictionary: tweetDictionary)
-            success?(tweet)
-        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-            failure?(error)
-        })
+        post(TwitterClient.statusesUpdatePath, parameters: data, success: success, failure: failure)
     }
 
     func favoriteCreate(statusId: String, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
@@ -113,12 +108,24 @@ class TwitterClient: BDBOAuth1SessionManager {
             "id": statusId
         ]
 
-        POST(TwitterClient.favoriteCreatePath, parameters: data, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweetDictionary = response as! NSDictionary
-            let tweet = Tweet(dictionary: tweetDictionary)
-            success?(tweet)
-        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+        post(TwitterClient.favoriteCreatePath, parameters: data, success: success, failure: failure)
+    }
+
+    func post(urlString: String, parameters: AnyObject?, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
+
+        POST(urlString,
+            parameters: parameters,
+            progress: nil,
+            success: {
+                (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweetDictionary = response as! NSDictionary
+                let tweet = Tweet(dictionary: tweetDictionary)
+                success?(tweet)
+            },
+            failure: {
+                (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure?(error)
-        })
+            }
+        )
     }
 }

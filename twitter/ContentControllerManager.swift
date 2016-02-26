@@ -11,6 +11,8 @@ import UIKit
 
 class ContentControllerManager {
 
+    static let loginTransitionDuration = 0.5
+
     struct ContentProperties {
 
         init(menuLabel: String, identifier: String) {
@@ -23,7 +25,7 @@ class ContentControllerManager {
     }
 
     static let contentItems: [ContentProperties] = [
-        ContentProperties(menuLabel: "Home Timeline", identifier: "TweetsNavigationController"),
+        ContentProperties(menuLabel: "Home Timeline", identifier: "HomeTimelineNavigationController"),
         ContentProperties(menuLabel: "Red", identifier: "RedNavigationController"),
     ]
 
@@ -38,14 +40,25 @@ class ContentControllerManager {
         return navigationControllers
     }
 
-    class func initHamburger() -> (HamburgerViewController) {
+    class func initHamburger() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
-        //        let hamburgerViewController = window!.rootViewController as! HamburgerViewController
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let window = appDelegate.window
 
+        let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
         let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
         menuViewController.hamburgerViewController = hamburgerViewController
         hamburgerViewController.menuViewController = menuViewController
-        return hamburgerViewController
+
+        UIView.transitionWithView(
+            window!,
+            duration: ContentControllerManager.loginTransitionDuration,
+            options: UIViewAnimationOptions.TransitionFlipFromRight,
+            animations: { () -> Void in
+                window?.rootViewController = hamburgerViewController
+            },
+            completion: nil
+        )
+
     }
 }
