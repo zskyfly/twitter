@@ -70,24 +70,40 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
-    func homeTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
-        GET(TwitterClient.statusesHomeTimelinePath, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweetDictionaries = response as! [NSDictionary]
-            let tweets = Tweet.tweetsWithArray(tweetDictionaries)
-            success(tweets)
-            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                failure(error)
-        })
+    func homeTimeline(maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+        var data: NSDictionary? = nil
+        if let maxId = maxId {
+            data = [
+                "max_id": Int(maxId)!
+            ]
+        }
+        getTimeline(TwitterClient.statusesHomeTimelinePath, parameters: data, success: success, failure: failure)
     }
 
-    func mentionsTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
-        GET(TwitterClient.statusesMentionsTimelinePath, parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            let tweetDictionaries = response as! [NSDictionary]
-            let tweets = Tweet.tweetsWithArray(tweetDictionaries)
-            success(tweets)
-            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                failure(error)
-        })
+    func mentionsTimeline(maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+        var data: NSDictionary? = nil
+        if let maxId = maxId {
+            data = [
+                "max_id": Int(maxId)!
+            ]
+        }
+        getTimeline(TwitterClient.statusesMentionsTimelinePath, parameters: data, success: success, failure: failure)
+    }
+
+    private func getTimeline(urlString: String, parameters: NSDictionary?, success: (([Tweet]) -> ())?, failure: ((NSError) -> ())?) {
+        print("\(urlString)\(parameters)")
+        GET(urlString,
+            parameters: parameters,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweetDictionaries = response as! [NSDictionary]
+                let tweets = Tweet.tweetsWithArray(tweetDictionaries)
+                success?(tweets)
+            },
+            failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure?(error)
+            }
+        )
     }
 
     func currentAccount(success: (User) -> (), failure: (NSError) -> ()) {
@@ -121,7 +137,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         post(TwitterClient.favoriteCreatePath, parameters: data, success: success, failure: failure)
     }
 
-    func post(urlString: String, parameters: AnyObject?, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
+    private func post(urlString: String, parameters: AnyObject?, success: ((Tweet) -> ())?, failure: ((NSError) -> ())?) {
 
         POST(urlString,
             parameters: parameters,

@@ -19,7 +19,7 @@ class TweetsViewController: UIViewController {
         super.viewDidLoad()
 
         initControllerProperties()
-        self.reloadTweets()
+        self.loadTweets()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -59,21 +59,51 @@ class TweetsViewController: UIViewController {
         }
     }
 
-    private func reloadTweets() {
-        self.controllerProperties.apiCall(success: reloadSuccessClosure,
-            failure: reloadFailureClosure)
+    /*
+    // MARK: - Load Tweets Functionality
+    */
+
+    private func loadTweets(getMore: Bool = false) {
+        var oldestId: String? = nil
+        var successClosure = reloadSuccessClosure
+
+        if getMore {
+            oldestId = getOldestTweetId()
+            successClosure = appendSuccessClosure
+        }
+        print("tweets first \(getNewestTweetId()) last \(getOldestTweetId())")
+        self.controllerProperties.apiCall(maxId: oldestId, success: successClosure,
+            failure: loadFailureClosure)
     }
 
     private func reloadSuccessClosure(tweets:[Tweet]) -> () {
+        self.tweets = tweets
+        loadSuccess()
+        tableView.pullToRefreshView.stopAnimating()
+    }
+
+    private func appendSuccessClosure(tweets:[Tweet]) -> () {
+        self.tweets.appendContentsOf(tweets)
+        loadSuccess()
+        tableView.infiniteScrollingView.stopAnimating()
+        tableView.addInfiniteScrollingWithActionHandler(infiniteScrollingActionHandler)
+    }
+
+    private func loadSuccess() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = self.controllerProperties.estimatedRowHight
-        self.tweets = tweets
         tableView.reloadData()
     }
 
-    private func reloadFailureClosure(error: NSError) -> () {
+    private func loadFailureClosure(error: NSError) -> () {
         print("\(error.localizedDescription)")
+        tableView.infiniteScrollingView.stopAnimating()
+        tableView.pullToRefreshView.stopAnimating()
     }
+
+    /*
+    // MARK: - Controller Setup
+    */
 
     private func initControllerProperties() {
         let storyboardId = self.restorationIdentifier!
@@ -81,14 +111,28 @@ class TweetsViewController: UIViewController {
         self.controllerProperties = ContentControllerManager.getTweetsControllerProperties(controllerType!)
 
         navigationItem.title = self.controllerProperties.navTitle
-        self.navigationController?.navigationBar.backgroundColor = self.controllerProperties.navBarColor
+        self.navigationController?.navigationBar.barTintColor = self.controllerProperties.navBarColor
 
-        tableView.addPullToRefreshWithActionHandler { () -> Void in
-            self.reloadTweets()
-            self.tableView.pullToRefreshView.stopAnimating()
-        }
+        tableView.addPullToRefreshWithActionHandler(pullToRefreshActionHandler)
+        tableView.addInfiniteScrollingWithActionHandler(infiniteScrollingActionHandler)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+
+    private func pullToRefreshActionHandler() {
+        loadTweets()
+    }
+
+    private func infiniteScrollingActionHandler() {
+        loadTweets(true)
+    }
+
+    private func getOldestTweetId() -> String? {
+        return self.tweets?.last?.idStr
+    }
+
+    private func getNewestTweetId() -> String? {
+        return self.tweets?.first?.idStr
     }
 }
 

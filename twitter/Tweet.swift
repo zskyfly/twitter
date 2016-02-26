@@ -20,6 +20,7 @@ class Tweet: NSObject {
     var favoriteCount: Int = 0
     var user: User?
     var idStr: String?
+    var id: Int?
 
     init(dictionary: NSDictionary) {
         self.text = dictionary["text"] as? String
@@ -27,6 +28,7 @@ class Tweet: NSObject {
         self.retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         self.favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         self.idStr = dictionary["id_str"] as? String
+        self.id = dictionary["id"] as? Int
         if let userDictionary = dictionary["user"] as? NSDictionary {
             self.user = User(dictionary: userDictionary)
         }

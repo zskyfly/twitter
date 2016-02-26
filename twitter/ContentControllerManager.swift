@@ -75,7 +75,7 @@ class ContentControllerManager {
 
     struct TweetsViewControllerProperties {
         var navTitle: String!
-        var apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
+        var apiCall: (maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> ()
         var storyboardId: String!
         var navBarColor: UIColor!
 
@@ -83,7 +83,7 @@ class ContentControllerManager {
         let estimatedRowHight: CGFloat = 100.0
 
         init(navTitle: String,
-            apiCall: (success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
+            apiCall: (maxId: String?, success: ([Tweet]) -> (), failure: (NSError) -> ()) -> (),
             storyboardId: String,
             navBarColor: UIColor? = nil
         ) {
