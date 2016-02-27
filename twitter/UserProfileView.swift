@@ -18,7 +18,7 @@ class UserProfileView: UIView {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var tweetCountLabel: UILabel!
     @IBOutlet weak var followerCountLabel: UILabel!
-
+    @IBOutlet weak var userDescriptionLabel: UILabel!
     @IBOutlet weak var followingCountLabel: UILabel!
     var user: User! {
         didSet {
@@ -38,6 +38,10 @@ class UserProfileView: UIView {
             self.followerCountLabel.text = "\(user.followersCount)"
             self.followingCountLabel.text = "\(user.friendsCount)"
             self.tweetCountLabel.text = "\(user.tweetCount)"
+            if let userDescription = user.profileDescription {
+                self.userDescriptionLabel.text = userDescription
+                
+            }
         }
     }
 

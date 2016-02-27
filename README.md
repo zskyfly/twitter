@@ -1,20 +1,20 @@
-# Project 4 - *Name of App Here*
+# Project 4 - *Twitter Hamburger Redux*
 
-Time spent: **X** hours spent in total
+Time spent: **16** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [ ] Hamburger menu
+- [x] Hamburger menu
    - [x] Dragging anywhere in the view should reveal the menu.
-   - [ ] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [x] The menu should include links to your profile, the home timeline, and the mentions view.
    - [ ] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
-- [ ] Profile page
-   - [ ] Contains the user header view
-   - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] Home Timeline
-   - [ ] Tapping on a user image should bring up that user's profile page
+- [x] Profile page
+   - [x] Contains the user header view
+   - [x] Contains a section with the users basic stats: # tweets, # following, # followers
+- [x] Home Timeline
+   - [x] Tapping on a user image should bring up that user's profile page
 
 The following **optional** features are implemented:
 
@@ -32,6 +32,8 @@ The following **additional** features are implemented:
 
 - [x] Infinite scroll
 - [x] Reusable TweetsViewController programmatically initialized for HomeTimeline and MentionsTimeline
+- [x] Tap on user profile image in "home" or "mentions" view to go to profile page.  They share the same controller class under the hood.
+- [x] Used reusable xib for profile view
 
 ## Video Walkthrough
 
@@ -43,11 +45,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I knew incorporating the v1 twitter app into the new hamburger framework would be a challenge.  So I first built out a working, standalone hamburger menu framework and optimized the framework before trying to incorporate.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [zskyfly productions]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
