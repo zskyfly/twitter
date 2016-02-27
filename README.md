@@ -40,13 +40,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://cloud.githubusercontent.com/assets/1156702/13371327/6f1d14c2-dcd8-11e5-869e-0419aa3bf14b.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I knew incorporating the v1 twitter app into the new hamburger framework would be a challenge.  So I first built out a working, standalone hamburger menu framework and optimized the framework before trying to incorporate.
+- I knew incorporating the v1 twitter app into the new hamburger framework would be a challenge.  So I first built out a working, standalone hamburger menu framework and optimized the framework before trying to incorporate.
+- Unfortunately didn't have time to get to the optionals.  Will try to circle back. Have a good idea about how to implement all of them.
 
 ## License
 

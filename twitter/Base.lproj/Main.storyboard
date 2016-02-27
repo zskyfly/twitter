@@ -670,7 +670,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o9y-VS-Gma">
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o9y-VS-Gma">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jy1-L4-sf2">
@@ -696,9 +696,6 @@
                                     <constraint firstAttribute="height" constant="48" id="et7-6w-hEr"/>
                                     <constraint firstAttribute="width" constant="48" id="xsO-Fa-YXF"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="c35-rP-Lgj" appends="YES" id="6Cc-Fw-t0d"/>
-                                </connections>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="32" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fyc-cr-V75">
                                 <rect key="frame" x="0.0" y="140" width="320" height="96"/>
@@ -779,11 +776,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Tf-pW-5ch" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="c35-rP-Lgj">
-                    <connections>
-                        <action selector="onTapUserImage:" destination="77m-a4-GBN" id="uJv-nR-AQJ"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-627" y="235"/>
         </scene>

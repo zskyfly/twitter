@@ -29,7 +29,7 @@ class TweetDetailViewController: UIViewController {
         ImageHelper.stylizeUserImageView(self.userImageView)
 
         if let user = self.tweet.user {
-            ImageHelper.setImageForView(user.profileUrl, placeholder: User.placeholderProfileImage, imageView: self.userImageView, success: nil, failure: nil)
+            ImageHelper.setImageForView(user.profileUrl, placeholder: ImageHelper.defaultBackgroundImage, imageView: self.userImageView, success: nil, failure: nil)
             userNameLabel.text = user.name as? String
             userHandleLabel.text = "@\(user.screenName!)"
         }

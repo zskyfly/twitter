@@ -46,11 +46,6 @@ class MenuViewController: UIViewController {
         }
         self.userNameLabel.text = user.name as? String
         self.userHandleLabel.text = "@\(user.screenName!)"
-
-    }
-
-    @IBAction func onTapUserImage(sender: UITapGestureRecognizer) {
-        print("tapped")
     }
 
 }
