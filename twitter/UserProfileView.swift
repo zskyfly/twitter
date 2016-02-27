@@ -23,13 +23,13 @@ class UserProfileView: UIView {
     var user: User! {
         didSet {
             if let backgroundImageUrl = user.profileBackgroundImageUrl {
-                ImageHelper.setImageForView(backgroundImageUrl, placeholder: UIImage(named: "missing_user"), imageView: self.backgroundImageView, success: nil) { (error) -> Void in
+                ImageHelper.setImageForView(backgroundImageUrl, placeholder: ImageHelper.defaultBackgroundImage, imageView: self.backgroundImageView, success: nil) { (error) -> Void in
                     print("\(error.localizedDescription)")
                 }
             }
 
             if let userImageUrl = user.profileUrl {
-                ImageHelper.setImageForView(userImageUrl, placeholder: UIImage(named: "missing_user"), imageView: self.userImageView, success: nil) { (error) -> Void in
+                ImageHelper.setImageForView(userImageUrl, placeholder: ImageHelper.defaultUserImage, imageView: self.userImageView, success: nil) { (error) -> Void in
                     print("\(error.localizedDescription)")
                 }
             }

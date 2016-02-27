@@ -19,8 +19,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_background" translatesAutoresizingMaskIntoConstraints="NO" id="3mr-gJ-zhG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3mr-gJ-zhG" secondAttribute="trailing" id="YZk-Ac-inZ"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3mr-gJ-zhG" secondAttribute="bottom" id="s1u-f9-pdx"/>

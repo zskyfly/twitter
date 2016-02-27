@@ -78,7 +78,11 @@ class HamburgerViewController: UIViewController {
 
     // Manually move the menu
     private func slideContentWithTranslation(translation: CGPoint) {
-        self.leftMarginConstraint.constant = self.originalLeftMargin + translation.x
+        let newPosX = self.originalLeftMargin + translation.x
+        if newPosX >= 0 {
+            self.leftMarginConstraint.constant = self.originalLeftMargin + translation.x
+        }
+
     }
 
     // Animate menu movements
@@ -96,7 +100,7 @@ class HamburgerViewController: UIViewController {
     }
 
     private func showMenu() {
-        let showX = CGFloat(self.view.frame.size.width - 50.0)
+        let showX = CGFloat(self.view.frame.size.width - 100.0)
         animateContentWithPosition(showX)
     }
 
