@@ -9,7 +9,7 @@ The following **required** functionality is completed:
 - [x] Hamburger menu
    - [x] Dragging anywhere in the view should reveal the menu.
    - [x] The menu should include links to your profile, the home timeline, and the mentions view.
-   - [ ] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
+   - [x] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
 - [x] Profile page
    - [x] Contains the user header view
    - [x] Contains a section with the users basic stats: # tweets, # following, # followers
@@ -34,18 +34,20 @@ The following **additional** features are implemented:
 - [x] Reusable TweetsViewController programmatically initialized for HomeTimeline and MentionsTimeline
 - [x] Tap on user profile image in "home" or "mentions" view to go to profile page.  They share the same controller class under the hood.
 - [x] Used reusable xib for profile view
+- [x] Number and date formatting throughout
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://cloud.githubusercontent.com/assets/1156702/13371327/6f1d14c2-dcd8-11e5-869e-0419aa3bf14b.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I knew incorporating the v1 twitter app into the new hamburger framework would be a challenge.  So I first built out a working, standalone hamburger menu framework and optimized the framework before trying to incorporate.
+- I knew incorporating the v1 twitter app into the new hamburger framework would be a challenge.  So I first built out a working, standalone hamburger menu framework and optimized the framework before trying to incorporate.
+- Unfortunately didn't have time to get to the optionals.  Will try to circle back. Have a good idea about how to implement all of them.
 
 ## License
 
