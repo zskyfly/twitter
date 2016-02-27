@@ -12,6 +12,8 @@ import UIKit
 class ContentControllerManager {
 
     static let loginTransitionDuration = 0.5
+    static let homeMenuImage = UIImage(named: "home")
+    static let mentionsMenuImage = UIImage(named: "megaphone")
 
     // MARK: - Hamburger Menu Configuration
 
@@ -19,12 +21,16 @@ class ContentControllerManager {
         var menuLabel: String!
         var navControllerIdentifier: String!
         var navBarColor: UIColor!
+        var navImage: UIImage?
 
-        init(menuLabel: String, identifier: String, navBarColor: UIColor? = nil) {
+        init(menuLabel: String, identifier: String, navBarColor: UIColor? = nil, navImage: UIImage? = nil) {
             self.menuLabel = menuLabel
             self.navControllerIdentifier = identifier
             if let navBarColor = navBarColor {
                 self.navBarColor = navBarColor
+            }
+            if let navImage = navImage {
+                self.navImage = navImage
             }
         }
     }

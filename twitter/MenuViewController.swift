@@ -12,10 +12,6 @@ class MenuViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    private var redNavigationController: UIViewController!
-    private var greenNavigationController: UIViewController!
-    private var blueNavigationController: UIViewController!
-
     var navigationControllers: [ContentNavigationController] = []
     var hamburgerViewController: HamburgerViewController!
 
