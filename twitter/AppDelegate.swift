@@ -13,25 +13,14 @@ import BDBOAuth1Manager
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
 
         if User.currentUser != nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
-            window?.rootViewController = vc
+            ContentControllerManager.initHamburger()
         }
 
-        NSNotificationCenter.defaultCenter().addObserverForName(User.notificationEventUserDidLogout, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) -> Void in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateInitialViewController()
-            UIView.transitionWithView(self.window!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () -> Void in
-                self.window?.rootViewController = vc
-            }, completion: nil)
-
-        }
+        registerNotificationObservers()
 
         return true
     }
@@ -63,6 +52,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TwitterClient.sharedInstance.handleOpenUrl(url)
 
         return true
+    }
+
+    func registerNotificationObservers() {
+
+        NSNotificationCenter.defaultCenter().addObserverForName(User.notificationEventUserDidLogout, object: nil, queue: NSOperationQueue.mainQueue()) {
+        (NSNotification) -> Void in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+
+            UIView.transitionWithView(
+                self.window!,
+                duration: ContentControllerManager.loginTransitionDuration,
+                options: UIViewAnimationOptions.TransitionFlipFromLeft,
+                animations: { () -> Void in
+                    self.window?.rootViewController = vc
+                },
+                completion: nil
+            )
+        }
     }
 }
 

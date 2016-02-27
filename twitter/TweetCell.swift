@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+@objc protocol TweetCellDelegate {
+    optional func tweetCell(tweetCell: TweetCell, didSelectTweet tweet: Tweet)
+    optional func tweetCell(tweetCell: TweetCell, didTapUser user: User)
+}
+
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
@@ -31,17 +37,49 @@ class TweetCell: UITableViewCell {
         }
     }
 
+    var delegate: TweetCellDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        userImageView.layer.cornerRadius = 3
-        userImageView.clipsToBounds = true
+        configureCell()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    private func configureCell() {
+        ImageHelper.stylizeUserImageView(self.userImageView)
+        addCellTapGestureRecognizer()
+        addUserTapGestureRecognizer()
+    }
+
+    private func stylizeCell() {
+        userImageView.layer.cornerRadius = 3
+        userImageView.clipsToBounds = true
+    }
+
+    private func addCellTapGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTapCell:"))
+        tapGestureRecognizer.delegate = self
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    private func addUserTapGestureRecognizer() {
+        self.userImageView.userInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("onTapUser:"))
+        tapGestureRecognizer.delegate = self
+        self.userImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func onTapCell(sender: UITapGestureRecognizer? = nil) {
+        self.delegate?.tweetCell!(self, didSelectTweet: self.tweet)
+    }
+
+    func onTapUser(sender: UITapGestureRecognizer? = nil) {
+        self.delegate?.tweetCell!(self, didTapUser: (self.tweet?.user)!)
     }
 
 }

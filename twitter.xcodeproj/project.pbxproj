@@ -22,6 +22,14 @@
 		931B362E1C7BE9E200505E97 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B362D1C7BE9E200505E97 /* Tweet.swift */; };
 		931B36301C7C0FEC00505E97 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B362F1C7C0FEC00505E97 /* TwitterClient.swift */; };
 		931B36321C7C228A00505E97 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931B36311C7C228A00505E97 /* TweetsViewController.swift */; };
+		93524D7C1C7FE1620044A6A9 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D7B1C7FE1620044A6A9 /* HamburgerViewController.swift */; };
+		93524D7E1C7FE1A20044A6A9 /* ContentControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D7D1C7FE1A20044A6A9 /* ContentControllerManager.swift */; };
+		93524D801C7FE1DD0044A6A9 /* ContentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D7F1C7FE1DD0044A6A9 /* ContentNavigationController.swift */; };
+		93524D821C7FE70E0044A6A9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D811C7FE70E0044A6A9 /* MenuViewController.swift */; };
+		93524D841C7FE7490044A6A9 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D831C7FE7490044A6A9 /* MenuCell.swift */; };
+		93524D861C80C8620044A6A9 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93524D851C80C8620044A6A9 /* UserProfileView.xib */; };
+		93524D881C80C8870044A6A9 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D871C80C8870044A6A9 /* UserProfileView.swift */; };
+		93524D8A1C80D39D0044A6A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93524D891C80D39D0044A6A9 /* ProfileViewController.swift */; };
 		93BBEA821C7D63C80033C051 /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBEA811C7D63C80033C051 /* NewTweetViewController.swift */; };
 		93BBEA841C7D712F0033C051 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BBEA831C7D712F0033C051 /* ImageHelper.swift */; };
 		F8B1C40347093281BB5C4FF7 /* Pods_twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA04F9436E93490AE2350AAC /* Pods_twitter.framework */; };
@@ -68,6 +76,14 @@
 		931B362D1C7BE9E200505E97 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		931B362F1C7C0FEC00505E97 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		931B36311C7C228A00505E97 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
+		93524D7B1C7FE1620044A6A9 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		93524D7D1C7FE1A20044A6A9 /* ContentControllerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentControllerManager.swift; sourceTree = "<group>"; };
+		93524D7F1C7FE1DD0044A6A9 /* ContentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentNavigationController.swift; sourceTree = "<group>"; };
+		93524D811C7FE70E0044A6A9 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		93524D831C7FE7490044A6A9 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		93524D851C80C8620044A6A9 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
+		93524D871C80C8870044A6A9 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		93524D891C80D39D0044A6A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		93BBEA811C7D63C80033C051 /* NewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		93BBEA831C7D712F0033C051 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		AA04F9436E93490AE2350AAC /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +129,7 @@
 				931B13081C7C4D630011E226 /* DateTimeHelper.swift */,
 				93BBEA831C7D712F0033C051 /* ImageHelper.swift */,
 				930F52061C7EAEB40090A212 /* MiscHelper.swift */,
+				93524D7D1C7FE1A20044A6A9 /* ContentControllerManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -177,10 +194,14 @@
 		931B36251C7BD3B300505E97 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				93524D7B1C7FE1620044A6A9 /* HamburgerViewController.swift */,
+				93524D811C7FE70E0044A6A9 /* MenuViewController.swift */,
 				931B36261C7BD3C500505E97 /* LoginViewController.swift */,
 				931B36311C7C228A00505E97 /* TweetsViewController.swift */,
 				931B130A1C7CCE100011E226 /* TweetDetailViewController.swift */,
 				93BBEA811C7D63C80033C051 /* NewTweetViewController.swift */,
+				93524D7F1C7FE1DD0044A6A9 /* ContentNavigationController.swift */,
+				93524D891C80D39D0044A6A9 /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -198,6 +219,9 @@
 			isa = PBXGroup;
 			children = (
 				931B13051C7C3DB50011E226 /* TweetCell.swift */,
+				93524D831C7FE7490044A6A9 /* MenuCell.swift */,
+				93524D851C80C8620044A6A9 /* UserProfileView.xib */,
+				93524D871C80C8870044A6A9 /* UserProfileView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -329,6 +353,7 @@
 				931B36021C7BD0C100505E97 /* LaunchScreen.storyboard in Resources */,
 				931B35FF1C7BD0C100505E97 /* Assets.xcassets in Resources */,
 				931B35FD1C7BD0C100505E97 /* Main.storyboard in Resources */,
+				93524D861C80C8620044A6A9 /* UserProfileView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,9 +427,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				931B36301C7C0FEC00505E97 /* TwitterClient.swift in Sources */,
+				93524D881C80C8870044A6A9 /* UserProfileView.swift in Sources */,
 				931B13061C7C3DB50011E226 /* TweetCell.swift in Sources */,
+				93524D7C1C7FE1620044A6A9 /* HamburgerViewController.swift in Sources */,
+				93524D7E1C7FE1A20044A6A9 /* ContentControllerManager.swift in Sources */,
 				931B130B1C7CCE100011E226 /* TweetDetailViewController.swift in Sources */,
 				931B13091C7C4D630011E226 /* DateTimeHelper.swift in Sources */,
+				93524D801C7FE1DD0044A6A9 /* ContentNavigationController.swift in Sources */,
+				93524D821C7FE70E0044A6A9 /* MenuViewController.swift in Sources */,
+				93524D8A1C80D39D0044A6A9 /* ProfileViewController.swift in Sources */,
 				931B36271C7BD3C500505E97 /* LoginViewController.swift in Sources */,
 				931B36321C7C228A00505E97 /* TweetsViewController.swift in Sources */,
 				931B35F81C7BD0C100505E97 /* AppDelegate.swift in Sources */,
@@ -412,6 +443,7 @@
 				931B362C1C7BE9D800505E97 /* User.swift in Sources */,
 				931B362E1C7BE9E200505E97 /* Tweet.swift in Sources */,
 				93BBEA821C7D63C80033C051 /* NewTweetViewController.swift in Sources */,
+				93524D841C7FE7490044A6A9 /* MenuCell.swift in Sources */,
 				93BBEA841C7D712F0033C051 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

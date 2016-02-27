@@ -11,85 +11,118 @@ import SVPullToRefresh
 
 class TweetsViewController: UIViewController {
 
+    var controllerProperties: ContentControllerManager.TweetsViewControllerProperties!
     var tweets: [Tweet]!
-    let estimated_row_height: CGFloat = 100.0
-
-
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
 
-        tableView.addPullToRefreshWithActionHandler { () -> Void in
-            self.reloadTweets()
-            self.tableView.pullToRefreshView.stopAnimating()
-        }
-
-        self.navigationItem.title = User._currentUser?.timeLineTitle
-
-        self.reloadTweets()
+        initControllerProperties()
+        self.loadTweets()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onLogoutButton(sender: AnyObject) {
-        TwitterClient.sharedInstance.logout()
-    }
 
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let identifier = segue.identifier!
-
-        switch identifier {
-        case "DetailViewSegue":
-            let cell = sender as! TweetCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let row = indexPath!.row
-            let tweet = self.tweets[row]
-            let vc = segue.destinationViewController as! TweetDetailViewController
-            vc.tweet = tweet
-            tableView.deselectRowAtIndexPath(indexPath!, animated: true)
-        case "NewTweetSegue":
-            let vc = segue.destinationViewController as! NewTweetViewController
-            vc.user = User._currentUser
-            vc.delegate = self
-        default:
-            return
-        }
-
-
+    func onTapLogout(sender: AnyObject) {
+        TwitterClient.sharedInstance.logout()
     }
 
-    func reloadTweets() {
-        TwitterClient.sharedInstance.homeTimeline({ (tweets:[Tweet]) -> () in
-            self.tableView.rowHeight = UITableViewAutomaticDimension
-            self.tableView.estimatedRowHeight = self.estimated_row_height
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }) { (error: NSError) -> () in
-            print("\(error.localizedDescription)")
-        }
+    func onTapNew(sender: AnyObject) {
+        let newVc = ContentControllerManager.initNewTweetViewController()
+        newVc.user = User._currentUser
+        newVc.delegate = self
+        showViewController(newVc, sender: self)
     }
 
+    /*
+    // MARK: - Load Tweets Functionality
+    */
+
+    private func loadTweets(beforeOldestTweet: Tweet? = nil) {
+        var successClosure = reloadSuccessClosure
+
+        if beforeOldestTweet != nil {
+            successClosure = appendSuccessClosure
+        }
+
+        self.controllerProperties.apiCall(oldestTweet: beforeOldestTweet, success: successClosure,
+            failure: loadFailureClosure)
+    }
+
+    private func reloadSuccessClosure(tweets:[Tweet]) -> () {
+        self.tweets = tweets
+        loadSuccess()
+        tableView.pullToRefreshView.stopAnimating()
+    }
+
+    private func appendSuccessClosure(tweets:[Tweet]) -> () {
+        self.tweets.appendContentsOf(tweets)
+        loadSuccess()
+        tableView.infiniteScrollingView.stopAnimating()
+    }
+
+    private func loadSuccess() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = self.controllerProperties.estimatedRowHight
+        tableView.reloadData()
+    }
+
+    private func loadFailureClosure(error: NSError) -> () {
+        print("\(error.localizedDescription)")
+        tableView.infiniteScrollingView.stopAnimating()
+        tableView.pullToRefreshView.stopAnimating()
+    }
+
+    /*
+    // MARK: - Controller Setup
+    */
+
+    private func initControllerProperties() {
+        let storyboardId = self.restorationIdentifier!
+        let controllerType = ContentControllerManager.TweetsControllerType(rawValue: storyboardId)
+        self.controllerProperties = ContentControllerManager.getTweetsControllerProperties(controllerType!)
+
+        navigationItem.title = self.controllerProperties.navTitle
+        self.navigationController?.navigationBar.barTintColor = self.controllerProperties.navBarColor
+
+        tableView.addPullToRefreshWithActionHandler(pullToRefreshActionHandler)
+        tableView.addInfiniteScrollingWithActionHandler(infiniteScrollingActionHandler)
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        initNavButtons()
+    }
+
+    private func initNavButtons() {
+        let newButton = UIBarButtonItem(title: "New", style: .Plain, target: self, action: Selector("onTapNew:"))
+        let logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: Selector("onTapLogout:"))
+        self.navigationItem.rightBarButtonItem = newButton
+        self.navigationItem.leftBarButtonItem = logoutButton
+    }
+
+    private func pullToRefreshActionHandler() {
+        loadTweets()
+    }
+
+    private func infiniteScrollingActionHandler() {
+        loadTweets(getOldestTweet())
+    }
+
+    private func getOldestTweet() -> Tweet? {
+        return self.tweets?.last
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource {
@@ -105,6 +138,7 @@ extension TweetsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         let tweet = self.tweets[indexPath.row]
         cell.tweet = tweet
+        cell.delegate = self
         return cell
     }
 }
@@ -114,9 +148,21 @@ extension TweetsViewController: UITableViewDelegate {}
 extension TweetsViewController: NewTweetViewControllerDelegate {
     func newTweetViewController(newTweetViewController: NewTweetViewController, didPostStatusUpdate tweet: Tweet) {
         self.tweets.insert(tweet, atIndex: 0)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
 }
 
+extension TweetsViewController: TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, didSelectTweet tweet: Tweet) {
+        let detailViewController = ContentControllerManager.initTweetDetailViewController()
+        detailViewController.tweet = tweet
+        showViewController(detailViewController, sender: self)
+    }
 
+    func tweetCell(tweetCell: TweetCell, didTapUser user: User) {
+        let profileViewController = ContentControllerManager.initNewProfileViewController()
+        profileViewController.user = user
+        showViewController(profileViewController, sender: self)
+    }
+}
