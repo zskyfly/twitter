@@ -11,6 +11,9 @@ import AFNetworking
 
 class ImageHelper {
 
+    static let defaultBackgroundImage = UIImage(named: "default_background")
+    static let defaultUserImage = UIImage(named: "missing_user")
+
     static func setImageForView(url: NSURL?, placeholder: UIImage?, imageView: UIImageView, success: (() -> Void)?, failure: ((error: NSError) -> Void)?) {
 
         if let url = url {

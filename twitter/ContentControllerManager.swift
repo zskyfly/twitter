@@ -12,8 +12,10 @@ import UIKit
 class ContentControllerManager {
 
     static let loginTransitionDuration = 0.5
+
     static let homeMenuImage = UIImage(named: "home")
     static let mentionsMenuImage = UIImage(named: "megaphone")
+    static let profileMenuImage = UIImage(named: "profile")
 
     // MARK: - Hamburger Menu Configuration
 
@@ -36,9 +38,9 @@ class ContentControllerManager {
     }
 
     static let contentItems: [ContentProperties] = [
-        ContentProperties(menuLabel: "Home", identifier: "HomeTimelineNavigationController"),
-        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController", navBarColor: MiscHelper.getUIColor(MiscHelper.twitterDarkGrey)),
-        ContentProperties(menuLabel: "Mentions", identifier: "MentionsTimelineNavigationController"),
+        ContentProperties(menuLabel: "Home", identifier: "HomeTimelineNavigationController", navBarColor: nil, navImage: ContentControllerManager.homeMenuImage),
+        ContentProperties(menuLabel: "Mentions", identifier: "MentionsTimelineNavigationController", navBarColor: nil, navImage: ContentControllerManager.mentionsMenuImage),
+        ContentProperties(menuLabel: "Profile", identifier: "ProfileNavigationController", navBarColor: MiscHelper.getUIColor(MiscHelper.twitterDarkGrey), navImage: ContentControllerManager.profileMenuImage),
     ]
 
     class func initContentNavigationControllers(storyboard: UIStoryboard) -> [ContentNavigationController] {

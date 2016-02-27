@@ -11,13 +11,18 @@ import UIKit
 class MenuViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var userHandleLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var bgImageView: UIImageView!
 
     var navigationControllers: [ContentNavigationController] = []
     var hamburgerViewController: HamburgerViewController!
+    var user: User! = User.currentUser
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initMenuFields()
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -31,16 +36,22 @@ class MenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    private func initMenuFields() {
+        ImageHelper.stylizeUserImageView(userImageView)
+        self.bgImageView.image = ImageHelper.defaultBackgroundImage
+        if let profileImageUrl = user.profileUrl {
+            ImageHelper.setImageForView(profileImageUrl, placeholder: ImageHelper.defaultUserImage, imageView: self.userImageView, success: nil, failure: { (error) -> Void in
+                print("\(error.localizedDescription)")
+            })
+        }
+        self.userNameLabel.text = user.name as? String
+        self.userHandleLabel.text = "@\(user.screenName!)"
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
     }
-    */
+
+    @IBAction func onTapUserImage(sender: UITapGestureRecognizer) {
+        print("tapped")
+    }
 
 }
 

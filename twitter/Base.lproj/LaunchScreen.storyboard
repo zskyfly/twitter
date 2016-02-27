@@ -17,18 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter_logo_white" translatesAutoresizingMaskIntoConstraints="NO" id="Y7Y-TH-2xk">
-                                <rect key="frame" x="136" y="260" width="48" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="apA-XK-c6X"/>
-                                    <constraint firstAttribute="width" constant="48" id="idj-Bk-XfQ"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_background" translatesAutoresizingMaskIntoConstraints="NO" id="3mr-gJ-zhG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Y7Y-TH-2xk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Q4M-ZM-nJJ"/>
-                            <constraint firstItem="Y7Y-TH-2xk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iL7-7W-7CQ"/>
+                            <constraint firstAttribute="trailing" secondItem="3mr-gJ-zhG" secondAttribute="trailing" id="YZk-Ac-inZ"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3mr-gJ-zhG" secondAttribute="bottom" id="s1u-f9-pdx"/>
+                            <constraint firstItem="3mr-gJ-zhG" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="uc0-7Q-Byu"/>
+                            <constraint firstItem="3mr-gJ-zhG" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="xYW-U4-7l6"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -39,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Twitter_logo_white" width="16" height="16"/>
+        <image name="default_background" width="900" height="300"/>
     </resources>
 </document>
