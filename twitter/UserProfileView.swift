@@ -35,9 +35,10 @@ class UserProfileView: UIView {
             }
             self.userNameLabel.text = user.name as? String
             self.userHandleLabel.text = "@" + (user.screenName as?String)!
-            self.followerCountLabel.text = "\(user.followersCount)"
-            self.followingCountLabel.text = "\(user.friendsCount)"
-            self.tweetCountLabel.text = "\(user.tweetCount)"
+            self.followerCountLabel.text = DateTimeHelper.sharedInstance.getNumberFormatted(user.followersCount)!
+
+            self.followingCountLabel.text = DateTimeHelper.sharedInstance.getNumberFormatted(user.friendsCount)!
+            self.tweetCountLabel.text = DateTimeHelper.sharedInstance.getNumberFormatted(user.tweetCount)!
             if let userDescription = user.profileDescription {
                 self.userDescriptionLabel.text = userDescription
                 

@@ -13,6 +13,7 @@ import UIKit
 class DateTimeHelper: NSDateFormatter {
 
     static let sharedInstance = DateTimeHelper()
+    static let numberFormatterInstance = NSNumberFormatter()
 
     static let defaultFormatString = "EEE MMM dd HH:mm:ss Z y"
     static let detailViewFormat = NSDateFormatterStyle.ShortStyle
@@ -127,6 +128,13 @@ class DateTimeHelper: NSDateFormatter {
 
     func getRoundIntFromDouble(num: Double) -> Int {
         return Int(round(num))
+    }
+
+    func getNumberFormatted(myNumber: Int) -> String? {
+        let numberFormatter = DateTimeHelper.numberFormatterInstance
+
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        return numberFormatter.stringFromNumber(myNumber)
     }
 
 }

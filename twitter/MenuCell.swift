@@ -10,13 +10,18 @@ import UIKit
 
 class MenuCell: UITableViewCell {
 
+    @IBOutlet weak var navImageView: UIImageView!
+    @IBOutlet weak var menuItemLabel: UILabel!
+
+
     var contentProperties: ContentControllerManager.ContentProperties! {
         didSet {
             menuItemLabel.text = contentProperties.menuLabel
+            navImageView.image = contentProperties.navImage
         }
     }
 
-    @IBOutlet weak var menuItemLabel: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
